@@ -1,0 +1,11 @@
+[build]
+target = "thumbv7em-none-eabihf" # Cortex-M4F/M7F (with FPU)
+
+[target.'cfg(all(target_arch = "arm", target_os = "none"))']
+rustflags = ["-C", "link-arg=-Tlink.x", "-C", "link-arg=-Tdefmt.x"]
+runner = "probe-run --chip stm32l475vg"
+
+[profile.release]
+debug = true      # symbols are nice and they don't increase the size on the target
+lto = true        # better optimizations
+codegen-units = 1 # better optimizations
