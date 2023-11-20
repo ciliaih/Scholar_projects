@@ -1,0 +1,280 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>A few simple problems - SE202 : Rust pour les systèmes embarqués</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../intro.html">Introduction</a></li><li class="chapter-item expanded "><a href="../labs/fibo.html"><strong aria-hidden="true">1.</strong> Prise en main : Fibonacci</a></li><li class="chapter-item expanded "><a href="../labs/vm/machine.html"><strong aria-hidden="true">2.</strong> A virtual machine in Rust</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../labs/vm/specs.html"><strong aria-hidden="true">2.1.</strong> Specifications</a></li></ol></li><li class="chapter-item expanded "><a href="../problems/problems.html" class="active"><strong aria-hidden="true">3.</strong> A few simple problems</a></li><li class="chapter-item expanded "><a href="../labs/led-matrix/led-matrix.html"><strong aria-hidden="true">4.</strong> LED matrix lab</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../labs/led-matrix/setup.html"><strong aria-hidden="true">4.1.</strong> Initial setup</a></li><li class="chapter-item expanded "><a href="../labs/led-matrix/structures.html"><strong aria-hidden="true">4.2.</strong> Visual data structures</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../labs/led-matrix/color.html"><strong aria-hidden="true">4.2.1.</strong> Color</a></li><li class="chapter-item expanded "><a href="../labs/led-matrix/image.html"><strong aria-hidden="true">4.2.2.</strong> Image</a></li><li class="chapter-item expanded "><a href="../labs/led-matrix/reexport.html"><strong aria-hidden="true">4.2.3.</strong> Reexporting types</a></li></ol></li><li class="chapter-item expanded "><a href="../labs/led-matrix/embedded.html"><strong aria-hidden="true">4.3.</strong> Embedded mode</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../labs/led-matrix/toolchain.html"><strong aria-hidden="true">4.3.1.</strong> Configuring the toolchain</a></li><li class="chapter-item expanded "><a href="../labs/led-matrix/uploading.html"><strong aria-hidden="true">4.3.2.</strong> Uploading the program onto the board</a></li><li class="chapter-item expanded "><a href="../labs/led-matrix/execution.html"><strong aria-hidden="true">4.3.3.</strong> Displaying something</a></li><li class="chapter-item expanded "><a href="../labs/led-matrix/optimize-setup.html"><strong aria-hidden="true">4.3.4.</strong> Optimizing the setup</a></li><li class="chapter-item expanded "><a href="../labs/led-matrix/hal.html"><strong aria-hidden="true">4.3.5.</strong> Configuring the hardware</a></li><li class="chapter-item expanded "><a href="../labs/led-matrix/matrix.html"><strong aria-hidden="true">4.3.6.</strong> GPIO and the LED matrix</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../labs/led-matrix/real-time.html"><strong aria-hidden="true">5.</strong> Real-time mode</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../labs/led-matrix/rtic.html"><strong aria-hidden="true">5.1.</strong> RTIC</a></li><li class="chapter-item expanded "><a href="../labs/led-matrix/timer.html"><strong aria-hidden="true">5.2.</strong> Monotonic timer</a></li><li class="chapter-item expanded "><a href="../labs/led-matrix/image-change.html"><strong aria-hidden="true">5.3.</strong> Image change</a></li><li class="chapter-item expanded "><a href="../labs/led-matrix/serial.html"><strong aria-hidden="true">5.4.</strong> Serial port</a></li><li class="chapter-item expanded "><a href="../labs/led-matrix/triple-buffering.html"><strong aria-hidden="true">5.5.</strong> Triple buffering</a></li><li class="chapter-item expanded "><a href="../labs/led-matrix/screen-saver.html"><strong aria-hidden="true">5.6.</strong> Screen saver</a></li><li class="chapter-item expanded "><a href="../labs/led-matrix/drawing.html"><strong aria-hidden="true">5.7.</strong> Drawing things</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">SE202 : Rust pour les systèmes embarqués</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="a-few-simple-problems"><a class="header" href="#a-few-simple-problems">A few simple problems</a></h1>
+<h2 id="lifetimes"><a class="header" href="#lifetimes">Lifetimes</a></h2>
+<p>You can create a &quot;problems&quot; Rust project in your repository to try your solutions to those simple problems.</p>
+<p>The <code>trim</code> method on <code>str</code> (and thus on <code>String</code> thanks to <code>Deref</code>) removes the blanks at the beginning and at the end of a string. Its signature is:</p>
+<pre><code class="language-rust no_run noplayground">fn trim(&amp;self) -&gt; &amp;str;</code></pre>
+<p>which is, thanks to lifetimes elision, a shortcut for</p>
+<pre><code class="language-rust no_run noplayground">fn trim&lt;'a&gt;(&amp;'a self) -&gt; &amp;'a str;</code></pre>
+<h3 id="who-is-the-owner"><a class="header" href="#who-is-the-owner">Who is the owner?</a></h3>
+<p>The following code fails to compile:</p>
+<pre><pre class="playground"><code class="language-rust">fn ret_string() -&gt; String {
+    String::from(&quot;  A String object  &quot;)
+}
+
+fn main() {
+    let s = ret_string().trim();
+    assert_eq!(s, &quot;A String object&quot;);
+}</code></pre></pre>
+<p>Why? Ask yourself: what is the lifetime of <code>s</code>? Who is the owner of the underlying string with spaces (every object has an owner)?</p>
+<p>❎ Fix the code so that it compiles (and the <code>s</code> variable represents the trimmed string). Note that you can reuse the same variable name.</p>
+<h3 id="select-between-alternatives"><a class="header" href="#select-between-alternatives">Select between alternatives</a></h3>
+<p>❎ Add the most appropriate lifetimes to the following function:</p>
+<pre><code class="language-rust no_run noplayground">fn choose_str(s1: &amp;str, s2: &amp;str, select_s1: bool) -&gt; &amp;str {
+    if select_s1 { s1 } else { s2 }
+}</code></pre>
+<p>At call time, <code>s1</code> and <code>s2</code> may have different lifetimes and we don't want any constraint between the lifetimes of those two strings.</p>
+<h3 id="write-a-oor-owned-or-ref-type"><a class="header" href="#write-a-oor-owned-or-ref-type">Write a OOR (owned or ref) type</a></h3>
+<p><em>For this problem, do not look at the standard <code>Cow</code> type.</em></p>
+<p>We want to create a <code>OOR</code> type which can store either a <code>String</code> or a <code>&amp;str</code> to avoid copying a string which already exists in the environment.</p>
+<p>❎ Write a <code>OOR</code> enum with two alternatives: <code>Owned</code> which stored a <code>String</code> and <code>Borrowed</code> which stores a <code>&amp;str</code>.</p>
+<p>It will require using a generic parameter. What does it represent?</p>
+<p>❎ Implement the <a href="https://doc.rust-lang.org/std/ops/trait.Deref.html"><code>Deref</code></a> trait for the <code>OOR</code> structure so that it dereferences into an a <code>&amp;str</code>. What is the lifetime of the resulting <code>&amp;str</code> (note that you have no choice there)? Why is that always appropriate?</p>
+<p>❎ Check that you can now call <code>&amp;str</code> methods directly on an arbitrary <code>OOR</code> object by writing some tests.</p>
+<p>❎ Write a <a href="https://doc.rust-lang.org/std/ops/trait.DerefMut.html"><code>DerefMut</code></a> trait for the <code>OOR</code> structure. If you have not stored a <code>String</code>, you will have to mutate and store a <code>String</code> before you can hand out a <code>&amp;mut str</code> because you can't transform your inner <code>&amp;str</code> into <code>&amp;mut str</code>.</p>
+<p>❎ Check that you can run the following test:</p>
+<pre><code class="language-rust no_run noplayground">// Check Deref for both variants of OOR
+let s1 = OOR::Owned(String::from(&quot;  Hello, world.  &quot;));
+assert_eq!(s1.trim(), &quot;Hello, world.&quot;);
+let mut s2 = OOR::Borrowed(&quot;  Hello, world!  &quot;);
+assert_eq!(s2.trim(), &quot;Hello, world!&quot;);
+
+// Check choose
+let s = choose_str(&amp;s1, &amp;s2, true);
+assert_eq!(s.trim(), &quot;Hello, world.&quot;);
+let s = choose_str(&amp;s1, &amp;s2, false);
+assert_eq!(s.trim(), &quot;Hello, world!&quot;);
+
+// Check DerefMut, a borrowed string should become owned
+assert!(matches!(s1, OOR::Owned(_)));
+assert!(matches!(s2, OOR::Borrowed(_)));
+unsafe {
+    for c in s2.as_bytes_mut() {
+        if *c == b'!' {
+            *c = b'?';
+        }
+    }
+}
+assert!(matches!(s2, OOR::Owned(_)));
+assert_eq!(s2.trim(), &quot;Hello, world?&quot;);</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../labs/vm/specs.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../labs/led-matrix/led-matrix.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../labs/vm/specs.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../labs/led-matrix/led-matrix.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

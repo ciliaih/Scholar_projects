@@ -1,0 +1,1452 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>SE202 : Rust pour les systèmes embarqués</title>
+        <meta name="robots" content="noindex" />
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="intro.html">Introduction</a></li><li class="chapter-item expanded "><a href="labs/fibo.html"><strong aria-hidden="true">1.</strong> Prise en main : Fibonacci</a></li><li class="chapter-item expanded "><a href="labs/vm/machine.html"><strong aria-hidden="true">2.</strong> A virtual machine in Rust</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="labs/vm/specs.html"><strong aria-hidden="true">2.1.</strong> Specifications</a></li></ol></li><li class="chapter-item expanded "><a href="problems/problems.html"><strong aria-hidden="true">3.</strong> A few simple problems</a></li><li class="chapter-item expanded "><a href="labs/led-matrix/led-matrix.html"><strong aria-hidden="true">4.</strong> LED matrix lab</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="labs/led-matrix/setup.html"><strong aria-hidden="true">4.1.</strong> Initial setup</a></li><li class="chapter-item expanded "><a href="labs/led-matrix/structures.html"><strong aria-hidden="true">4.2.</strong> Visual data structures</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="labs/led-matrix/color.html"><strong aria-hidden="true">4.2.1.</strong> Color</a></li><li class="chapter-item expanded "><a href="labs/led-matrix/image.html"><strong aria-hidden="true">4.2.2.</strong> Image</a></li><li class="chapter-item expanded "><a href="labs/led-matrix/reexport.html"><strong aria-hidden="true">4.2.3.</strong> Reexporting types</a></li></ol></li><li class="chapter-item expanded "><a href="labs/led-matrix/embedded.html"><strong aria-hidden="true">4.3.</strong> Embedded mode</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="labs/led-matrix/toolchain.html"><strong aria-hidden="true">4.3.1.</strong> Configuring the toolchain</a></li><li class="chapter-item expanded "><a href="labs/led-matrix/uploading.html"><strong aria-hidden="true">4.3.2.</strong> Uploading the program onto the board</a></li><li class="chapter-item expanded "><a href="labs/led-matrix/execution.html"><strong aria-hidden="true">4.3.3.</strong> Displaying something</a></li><li class="chapter-item expanded "><a href="labs/led-matrix/optimize-setup.html"><strong aria-hidden="true">4.3.4.</strong> Optimizing the setup</a></li><li class="chapter-item expanded "><a href="labs/led-matrix/hal.html"><strong aria-hidden="true">4.3.5.</strong> Configuring the hardware</a></li><li class="chapter-item expanded "><a href="labs/led-matrix/matrix.html"><strong aria-hidden="true">4.3.6.</strong> GPIO and the LED matrix</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="labs/led-matrix/real-time.html"><strong aria-hidden="true">5.</strong> Real-time mode</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="labs/led-matrix/rtic.html"><strong aria-hidden="true">5.1.</strong> RTIC</a></li><li class="chapter-item expanded "><a href="labs/led-matrix/timer.html"><strong aria-hidden="true">5.2.</strong> Monotonic timer</a></li><li class="chapter-item expanded "><a href="labs/led-matrix/image-change.html"><strong aria-hidden="true">5.3.</strong> Image change</a></li><li class="chapter-item expanded "><a href="labs/led-matrix/serial.html"><strong aria-hidden="true">5.4.</strong> Serial port</a></li><li class="chapter-item expanded "><a href="labs/led-matrix/triple-buffering.html"><strong aria-hidden="true">5.5.</strong> Triple buffering</a></li><li class="chapter-item expanded "><a href="labs/led-matrix/screen-saver.html"><strong aria-hidden="true">5.6.</strong> Screen saver</a></li><li class="chapter-item expanded "><a href="labs/led-matrix/drawing.html"><strong aria-hidden="true">5.7.</strong> Drawing things</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">SE202 : Rust pour les systèmes embarqués</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
+<p>Ce site contient les cours et travaux pratiques du cours <em>SE202 : Rust pour les systèmes embarqués</em> proposé par Guillaume Duc et Samuel Tardieu dans le cadre de la filière <em>Systèmes Embarqués</em> de <a href="https://www.telecom-paris.fr/">Télécom Paris</a>. Son utilisation est réservée aux étudiants de l'<a href="https://www.ip-paris.fr">Institut Polytechnique de Paris</a>.</p>
+<p>Une archive de l'énoncé des travaux pratiques est disponible pour le travail hors-ligne : <a href="book.tar.xz">book.tar.xz</a>.</p>
+<p>Les cours magistraux sont disponibles <a href="../../slides/">en suivant ce lien</a>.</p>
+<p><em>ⓒ 2020-2023 Guillaume Duc et Samuel Tardieu – tous droits réservés</em></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="prise-en-main--fibonacci"><a class="header" href="#prise-en-main--fibonacci">Prise en main : Fibonacci</a></h1>
+<p>Pour prendre rapidement en main Rust, nous allons commencer par un classique : la suite de Fibonacci.</p>
+<h2 id="création-du-projet"><a class="header" href="#création-du-projet">Création du projet</a></h2>
+<p>❎ Créez un nouveau projet avec la commande <code>cargo new fibo</code>. Cela va créer un nouveau répertoire <code>fibo</code> avec un projet éponyme de type <em>binaire</em> (on aurait pu utiliser <code>--lib</code> pour créer un projet de type <em>bibliothèque</em>). Rendez-vous dans ce répertoire.</p>
+<p>Le projet est organisé ainsi :</p>
+<ul>
+<li>À la racine, <code>Cargo.toml</code> contient les informations sur le projet (nom, auteur, etc.). Ce fichier contiendra également les dépendances utilisées par ce projet.</li>
+<li>À la racine également, <code>Cargo.lock</code> contiendra, après compilation, des informations sur les versions exactes des dépendances utilisées pour cette compilation, de manière à pouvoir reproduire les conditions exactes de compilation si nécessaire.</li>
+<li><code>src/</code> contient le code du projet.</li>
+</ul>
+<p>Tous ces fichiers et répertoires ont vocation à être ajoutés dans votre système de gestion de version (<code>git</code> en ce qui nous concerne). Par défaut, si vous ne vous trouvez pas déjà dans un dépôt git, cargo crée également un dépôt git vide dans le répertoire cible ainsi qu'un fichier <code>.gitignore</code>. Vous pouvez changer ce comportement avec l'option <code>--vcs</code> (voir <code>cargo help new</code>).</p>
+<p>Après compilation, un répertoire <code>target</code> contiendra les fichiers objets et les binaires. Il doit être ignoré par le système de gestion de version (il l'est dans le fichier <code>.gitignore</code> crée par cargo).</p>
+<p>Compilez le projet à l'aide de la commande <code>cargo build</code>. Par défaut, une version en mode <em>debug</em>, beaucoup plus lente mais plus facilement déboguable, sera construite et pourra être trouvée dans <code>target/debug/fibo</code>. Exécutez le programme, et constatez pour l'instant que cela affiche &quot;Hello, world!&quot;. Cela correspond au code qui se trouve dans <code>src/main.rs</code>.</p>
+<p>Vous pouvez également compiler et exécuter (en cas de succès) le programme en une seule commande : <code>cargo run</code>.</p>
+<p><strong>Note :</strong> vous pouvez construire ou exécuter des versions en mode <em>release</em> à l'aide de <code>cargo build --release</code> et <code>cargo run --release</code>.</p>
+<h2 id="implémentation-récursive-de-la-fonction-fibo"><a class="header" href="#implémentation-récursive-de-la-fonction-fibo">Implémentation récursive de la fonction <code>fibo</code></a></h2>
+<p>❎ Implémentez la fonction <code>fibo</code> de manière récursive avec le prototype suivant</p>
+<pre><code class="language-rust ignore">fn fibo(n: u32) -&gt; u32 {
+    // TODO
+}</code></pre>
+<p>On doit avoir <code>fibo(0) = 0</code>, <code>fibo(1) = 1</code>, <code>fibo(n) = fibo(n-1) + fibo(n-2)</code>. N'oubliez pas que les expressions de type <code>if</code> retournent une valeur, vous n'avez pas besoin d'utiliser explicitement <code>return</code> dans votre code.</p>
+<p>Dans la fonction <code>main</code>, faîtes une boucle de 0 à 42 (en incluant les bornes) qui affiche :</p>
+<pre><code class="language-text">fibo(0) = 0
+fibo(1) = 1
+fibo(2) = 1
+fibo(3) = 2
+fibo(4) = 3
+fibo(5) = 5
+</code></pre>
+<p>jusqu'à <code>fibo(42) = 267914296</code>.</p>
+<p>Vous pourrez comparer les vitesses d'exécution en mode <code>debug</code> et en mode <code>release</code>.</p>
+<h2 id="implémentation-itérative"><a class="header" href="#implémentation-itérative">Implémentation itérative</a></h2>
+<p>❎ Réimplémentez la fonction <code>fibo</code> avec la même signature mais de manière itérative.</p>
+<p>Pour cela, vous aurez besoin probablement</p>
+<ul>
+<li>de déclarer des variables</li>
+<li>de déclarer des variables modifiables avec <code>mut</code></li>
+<li>de faire une boucle dans laquelle vous n'utiliserez pas l'indice de boucle, vous pourrez utiliser <code>_</code> comme nom d'indice pour ne pas avoir de warning de la part du compilateur</li>
+</ul>
+<p>Vous pourrez également retourner de manière prématurée en utilisant <code>return</code> si l'argument est plus petit que 2 par exemple.</p>
+<h2 id="vérification-des-calculs"><a class="header" href="#vérification-des-calculs">Vérification des calculs</a></h2>
+<p>Changez la borne maximale de 42 à 50. Remarquez ce qui se passe entre <code>fibo(47)</code> et <code>fibo(48)</code>. Comprenez-vous ce qui se passe ?</p>
+<p>Nous avons plusieurs moyens de corriger ce problème :</p>
+<ul>
+<li>élargir la taille des entiers, et utiliser par exemple <code>u64</code> au lieu de <code>u32</code></li>
+<li>utiliser de l'arithmétique saturée, qui garantit qu'en cas de dépassement d'une borne (inférieure ou supérieure) la valeur de cette borne sera renvoyée</li>
+<li>utiliser de l'arithmétique vérifiée, qui nous signale une erreur si l'opération donne un résultat qui ne tient pas dans la taille ciblée</li>
+</ul>
+<h3 id="arithmétique-saturée"><a class="header" href="#arithmétique-saturée">Arithmétique saturée</a></h3>
+<p>Dans la <a href="https://doc.rust-lang.org/std/primitive.u32.html">documentation du type <code>u32</code></a>, recherchez la méthode <code>saturating_add</code>.</p>
+<p>❎ Remplacez l'addition dans votre code par une addition en arithmétique saturée. Exécutez le programme, comparez.</p>
+<p><strong>Note :</strong> n'oubliez pas que vous pouvez indiquer le type des nombres litéraux en les suffixant par un type prédéfini, comme <code>1u32</code>.</p>
+<p>Les résultats sont maintenant monotones, mais ne sont toujours pas corrects. Ils sont limités par la valeur maximale d'un <code>u32</code>, à savoir 2<sup>32</sup>-1.</p>
+<h3 id="arithmétique-vérifiée"><a class="header" href="#arithmétique-vérifiée">Arithmétique vérifiée</a></h3>
+<p>Dans la documentation du type <code>u32</code>, recherchez la méthode <code>checked_add</code>.</p>
+<p>❎ Remplacez l'addition (saturée) par un appel à <code>checked_add</code> suivi d'un appel à <code>unwrap()</code> pour récupérer la valeur dans l'option. Exécutez le programme, et constatez l'erreur à l'exécution.</p>
+<p>Bien que le programme plante, au moins il n'affiche plus de valeur incorrecte !</p>
+<h3 id="affichage-des-valeurs-correctes-uniquement"><a class="header" href="#affichage-des-valeurs-correctes-uniquement">Affichage des valeurs correctes uniquement</a></h3>
+<p>Modifiez le prototype de <code>fibo</code> ainsi :</p>
+<pre><code class="language-rust ignore">fn fibo(n: u32) -&gt; Option&lt;u32&gt; {
+    // TODO
+}</code></pre>
+<p>Retournez <code>None</code> s'il n'est pas possible de représenter le résultat sur un <code>u32</code>, ou <code>Some(résultat)</code> lorsqu'il tient sur un <code>u32</code>.</p>
+<p>❎ Après avoir fait les modifications ci-dessus, modifiez ensuite le programme principal pour qu'il sorte de la boucle dès lors qu'il n'est pas possible d'afficher le résultat.</p>
+<p>Vous pouvez utiliser avantageusement :</p>
+<ul>
+<li><code>match</code></li>
+<li><code>if let Some(…) = … { }</code></li>
+</ul>
+<h1 id="utilisation-de-crates"><a class="header" href="#utilisation-de-crates">Utilisation de crates</a></h1>
+<p>Un crate est un regroupement de fonctionnalités. Il peut être de deux sortes : binaire ou bibliothèque. Lorsque vous avez créé votre projet, vous avez créé un crate binaire portant le nom du projet (<code>fibo</code>) dont le code source est dans <code>src/main.rs</code>.</p>
+<p>Vous pouvez importer des crates, afin de pouvoir utiliser les fonctionnalités qu'ils offrent, soit depuis des projets locaux, soit depuis des sources distantes. L'écosystème Rust fournit un dépôt central <a href="https://crates.io/">crates.io</a> regroupant de nombreux crates (mais vous pouvez utiliser d'autres dépôts). L'utilitaire <code>cargo</code> vous permet très simplement de récupérer ces crates, de les utiliser dans vos projets, et de suivre leurs mises à jour. Il vous permet également très facilement de publier vos propres crates.</p>
+<p>On se propose d'utiliser le crate <a href="https://docs.rs/clap">clap</a> afin d'ajouter la possibilité de passer des arguments et des options sur la ligne de commande à notre programme <code>fibo</code>.</p>
+<p>❎ Ajoutez les deux lignes suivantes au fichier <code>Cargo.toml</code> :</p>
+<pre><code class="language-toml">[dependencies]
+clap = { version = &quot;4.1.4&quot;, features = [&quot;derive&quot;] }
+</code></pre>
+<p>On indique ainsi que notre projet nécessite le crate <code>clap</code>, dans sa version 4.1.4 ou ultérieure, jusqu'à la version 5.0.0 exclue (plus d'informations dans <a href="https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html">la documentation de cargo</a> sur la manière de spécifier ces numéros de version). On indique également que l'on souhaite utiliser la fonctionnalité <code>derive</code> de clap <a href="https://docs.rs/clap/latest/clap/#feature-flags">qui n'est pas activée par défaut</a>. Elle permet de disposer de <code>#[derive(Parser)]</code>.</p>
+<p>Il n'y a plus qu'à, dans <code>main.rs</code> à importer les structures du crate dont vous avez besoin pour pouvoir les utiliser :</p>
+<pre><code class="language-rust ignore">use clap::Parser;</code></pre>
+<p>❎ En vous servant <a href="https://docs.rs/clap">de la documentation de <code>clap</code></a>, transformez votre application pour qu'elle fonctionne selon le schéma suivant :</p>
+<pre><code class="language-text">Compute Fibonacci suite values
+
+Usage: fibo [OPTIONS] &lt;VALUE&gt;
+
+Arguments:
+  &lt;VALUE&gt;  The maximal number to print the fibo value of
+
+Options:
+  -v, --verbose       Print intermediate values
+  -m, --min &lt;NUMBER&gt;  The minimum number to compute
+  -h, --help          Print help
+</code></pre>
+<p>(vous n'aurez peut-être pas exactement le même affichage en fonction des versions et fonctionnalités de clap, ce n'est pas grave)</p>
+<p>Vous noterez au passage que le fait de spécifier que vous utilisez <code>clap</code> dans <code>Cargo.toml</code> récupère automatiquement et transitivement les dépendances de <code>clap</code> et les compile lorsque vous construisez l'application.</p>
+<p>Vous pourrez vérifier les versions exactes utilisées dans le fichier <code>Cargo.lock</code> que nous avons évoqué plus haut et qui permet aux autres utilisateurs de reconstruire exactement la même version du programme que celle que vous avez construite vous-même.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="a-virtual-machine-in-rust"><a class="header" href="#a-virtual-machine-in-rust">A virtual machine in Rust</a></h1>
+<p>The goal of this assignment is to write an interpreter for a virtual machine of our own. You have access to
+<a href="labs/vm/./specs.html">the machine specification</a>.</p>
+<h2 id="your-program"><a class="header" href="#your-program">Your program</a></h2>
+<p>Your program will contain both an application and a library.</p>
+<p>You are given <a href="labs/vm/tp-rust-2.tar.gz">an archive file</a> which contains (in a <code>tp-rust-2</code> project):</p>
+<ul>
+<li><code>Cargo.toml</code>: the configuration file</li>
+<li><code>src/main.rs</code>: the main program for the application, which loads a binary file with machine code and executes it</li>
+<li><code>src/lib.rs</code>: the entry point for the <code>interpreter</code> library which contains your implementation of the virtual machine</li>
+<li><code>src/tests/</code>: a directory with many tests, ranging from individual instructions tests to complex tests</li>
+<li><code>src/examples/</code>: some examples that you can run when your interpreter is complete</li>
+</ul>
+<p>Tests and examples are accompanied by their disassembled counterpart (<code>*.bin</code> is the program for the virtual machine, <code>*.dis</code> is the disassembly).</p>
+<p>Start by adding <code>tp-rust-2</code> to your repository and ensure that you can build the program even though it doesn't do anything useful yet and will contain many warnings:</p>
+<pre><code class="language-text">$ cargo build
+</code></pre>
+<p>You can see the tests fail (hopefully this is a temporary situation) by running:</p>
+<pre><code class="language-text">$ cargo test
+</code></pre>
+<h2 id="program-structure"><a class="header" href="#program-structure">Program structure</a></h2>
+<p>At any time, make sure that the program and the tests compile, even if they don't pass succesfully yet. In particular, you cannot rename the <code>Machine</code> and <code>MachineError</code> types, although you can of course modify them to implement this assignment. Similarly, the already documented method are intended to be kept without modifying their signature.</p>
+<p>❎ After creating a new interpreter through <code>interpreter::Machine::new()</code>, the following methods must be implemented:</p>
+<ul>
+<li><code>step_on()</code>: takes a <a href="https://doc.rust-lang.org/std/io/trait.Write.html"><code>Write</code></a>-implementing descriptor (for the <code>out</code> and <code>out number</code> instructions), and execute just one instruction</li>
+<li><code>step()</code>: similar to <code>step_on()</code>, but writes on the standard output</li>
+<li><code>run_on()</code>: takes a <code>Write</code>-implementing descriptor and runs until the program terminates</li>
+<li><code>run()</code>: similar to <code>run_on()</code>, but writes on the standard output</li>
+<li><code>memory()</code> and <code>regs()</code>: return a reference on the current memory and registers content</li>
+<li><code>set_reg()</code>: set the value of a register</li>
+</ul>
+<p>Do not hesitate to add values to the <code>MachineError</code> enumeration to ease debugging. Also, you can implement additional functions to <code>Machine</code> if it helps dividing the work.</p>
+<p>As far as <code>Machine::new()</code> is concerned, you might be interested in looking at <a href="https://doc.rust-lang.org/std/primitive.slice.html#method.copy_from_slice"><code>slice::copy_from_slice()</code></a>.</p>
+<h2 id="suggested-work-program"><a class="header" href="#suggested-work-program">Suggested work program</a></h2>
+<p>Several tests are provided in the <code>tests</code> directory:</p>
+<ul>
+<li><code>assignment.rs</code> contains all the examples shown in the specification. You should try to concentrate on this one first and implement instructions in the same order as in the specification (and the test) until you pass this test. You can run only this test by using <code>cargo test --test assignment</code>.</li>
+<li><code>basic_operations.rs</code> checks that all instructions are implemented correctly. For example, it will attempt to read and write past the virtual machine memory, or use an invalid register, and check that you do not allow it.</li>
+<li><code>complex_execution.rs</code> will load binary images and execute them using your virtual machine.</li>
+</ul>
+<h2 id="how-to-debug-more-easily"><a class="header" href="#how-to-debug-more-easily">How to debug more easily</a></h2>
+<p>In order to ease debugging, you can use two existing crates, <code>log</code> and <code>pretty_env_logger</code>.</p>
+<p><code>log</code> provides you with a set of macros letting you formatting debugging information with different severities:</p>
+<ul>
+<li><code>log::info!(…)</code> is for regular information</li>
+<li><code>log::debug!(…)</code> is for data you'd like to see when debugging</li>
+<li><code>log::trace!(…)</code> is for more verbose cases</li>
+<li>…</li>
+</ul>
+<p>See the <a href="https://docs.rs/log">documentation</a> for a complete information.</p>
+<p><code>pretty_env_logger</code> is a back-end for <code>log</code> which gives you nice colored messages and is configured through environment variables.
+You can initialize at the beginning of your main program by calling <code>pretty_env_logger::init()</code>. Then, you can set an environment variable to determine the severities you want to see:</p>
+<pre><code class="language-bash">$ RUST_LOG=debug cargo run mytest.bin
+</code></pre>
+<p>You'll then see all messages with severity <code>debug</code> and above. Once again, the <a href="https://docs.rs/pretty_env_logger">documentation</a> is online.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="machine-architecture"><a class="header" href="#machine-architecture">Machine architecture</a></h1>
+<h2 id="machine-model"><a class="header" href="#machine-model">Machine model</a></h2>
+<p>The machine model is simple:</p>
+<ul>
+<li>The memory contains both the program and the data.</li>
+<li>The memory contains 4096 bytes and is addressed from address 0 to address 4095.</li>
+<li>There are 16 32-bit registers numbered from 0 to 15.</li>
+<li>Register 0 is the instruction pointer (IP). It contains the address of the next instruction to be executed.</li>
+<li>Reads from memory and writes to memory are 32-bit wide and do not need to be aligned.</li>
+<li>Data stored in memory uses little-endian ordering.</li>
+</ul>
+<h2 id="execution-model"><a class="header" href="#execution-model">Execution model</a></h2>
+<p>A step of execution happens as follows:</p>
+<ol>
+<li>The instruction at IP is decoded. Its length depends on the instruction (in other words, instruction size is variable). Note that each element - e.g <code>reg_a</code> - of the instruction is encoded on exactly one byte.</li>
+<li>IP is advanced to point after the decoded instruction and its arguments.</li>
+<li>The decoded instruction is executed.</li>
+</ol>
+<h1 id="instruction-set"><a class="header" href="#instruction-set">Instruction set</a></h1>
+<p>The number of instructions is very limited. We will give at least one example for every instruction. All examples assume that:</p>
+<ul>
+<li>register <code>r1</code> contains 10</li>
+<li>register <code>r2</code> contains 25</li>
+<li>register <code>r3</code> contains 0x1234ABCD</li>
+<li>register <code>r4</code> contains 0</li>
+<li>register <code>r5</code> contains 65</li>
+</ul>
+<p>All other registers are unused in the examples.</p>
+<p>If the example contains <code>1 1 2 3</code>, it means that the instruction is made of bytes 1, 1, 2 and 3 (4 bytes total) in this order.</p>
+<h2 id="move-if"><a class="header" href="#move-if">move if</a></h2>
+<p><code>1 reg_a reg_b reg_c</code>: if register <code>reg_c</code> contains a non-zero value, copy the content of register <code>reg_b</code> into register <code>reg_a</code>; otherwise do nothing.</p>
+<p>Examples:</p>
+<ul>
+<li><code>1 1 2 3</code>: since register <code>r3</code> contains a non-zero value (0x1234ABCD), register <code>r1</code> is set to 25 (the value of register <code>r2</code>).</li>
+<li><code>1 1 2 4</code>: since register <code>r4</code> contains a zero value, nothing happens.</li>
+</ul>
+<h2 id="store"><a class="header" href="#store">store</a></h2>
+<p><code>2 reg_a reg_b</code>: store the content of register <code>reg_b</code> into the memory starting at address pointed by register <code>reg_a</code> using little-endian representation.</p>
+<p>Example:</p>
+<ul>
+<li><code>2 2 3</code>: the content of register <code>r3</code> (0x1234ABCD) will be stored at addresses [25, 26, 27, 28] since register <code>r2</code> contain 25. 0xCD will be stored into address 25, 0xAB into address 26, 0x34 into address 27, and 0x12 into address 28.</li>
+</ul>
+<h2 id="load"><a class="header" href="#load">load</a></h2>
+<p><code>3 reg_a reg_b</code>: load the 32-bit content from memory at address pointed by register <code>reg_b</code> into register <code>reg_a</code> using little-endian representation.</p>
+<p>Example:</p>
+<ul>
+<li><code>3 1 2</code>: since register <code>r2</code> contains 25, move the 32-bit value at addresses [25, 26, 27, 28] into register <code>r1</code>. In little-endian format, it means that if address 25 contains 0xCD, address 26 contains 0xAB, address 27 contains 0x34, and address 28 contains 0x12, the value loaded into register <code>r1</code> will be 0x1234ABCD.</li>
+</ul>
+<h2 id="loadimm"><a class="header" href="#loadimm">loadimm</a></h2>
+<p><code>4 reg_a L H</code>: interpret <code>H</code> and <code>L</code> respectively as the high-order and the low-order bytes of a 16-bit signed value, <a href="https://en.wikipedia.org/wiki/Sign_extension">sign-extend it</a> to 32 bits, and store it into register <code>reg_a</code>.</p>
+<p>Examples:</p>
+<ul>
+<li><code>4 1 0x11 0x70</code>: store 0x00007011 into register <code>r1</code></li>
+<li><code>4 1 0x11 0xd0</code>: store 0xffffd011 into register <code>r1</code></li>
+</ul>
+<p>Note how sign extension transforms a positive 16 bit value (0x7011 == 28689) into a positive 32 bit value (0x00007011 == 28689) and a negative 16 bit value (0xd011 == -12271) into a negative 32-bit value (0xffffd011 == -12271).</p>
+<h2 id="sub"><a class="header" href="#sub">sub</a></h2>
+<p><code>5 reg_a reg_b reg_c</code>: store the content of register <code>reg_b</code> minus the content of register <code>reg_c</code> into register <code>reg_a</code></p>
+<p>Arithmetic wraps around in case of overflow. For example, 0 - 1 returns 0xffffffff, and 0 - 0xffffffff returns 1.</p>
+<p>Examples:</p>
+<ul>
+<li><code>5 10 2 1</code>: store 15 into <code>r10</code> (the subtraction of register <code>r2</code> 25 and register <code>r1</code> 10).</li>
+<li><code>5 10 4 1</code>: store -10 (0xfffffff6) into <code>r10</code> (the subtraction of register <code>r4</code> 0 and register <code>r1</code> 10).</li>
+</ul>
+<h2 id="out"><a class="header" href="#out">out</a></h2>
+<p><code>6 reg_a</code>: output the character whose unicode value is stored in the 8 low bits of register <code>reg_a</code>.</p>
+<p>Example:</p>
+<ul>
+<li><code>6 5</code>: output &quot;A&quot; since the 8 low bits of register <code>r5</code> contain 65 which is the unicode codepoint for &quot;A&quot;.</li>
+<li><code>6 3</code>: output &quot;Í&quot; since the 8 low bits of register <code>r3</code> contain 0xCD which is the unicode codepoint for &quot;Í&quot;.</li>
+</ul>
+<h2 id="exit"><a class="header" href="#exit">exit</a></h2>
+<p><code>7</code>: exit the current program</p>
+<p>Example:</p>
+<ul>
+<li><code>7</code>: get out.</li>
+</ul>
+<h2 id="out-number"><a class="header" href="#out-number">out number</a></h2>
+<p><code>8 reg_a</code>: output the signed number stored in register <code>reg_a</code> in decimal.</p>
+<p>Example:</p>
+<ul>
+<li><code>8 5</code>: output &quot;65&quot; since register <code>r5</code> contains 65.</li>
+<li><code>8 3</code>: output &quot;305441741&quot; since register <code>r3</code> contains 0x1234ABCD.</li>
+</ul>
+<h2 id="other-opcodes"><a class="header" href="#other-opcodes">Other opcodes</a></h2>
+<p>All other opcodes are invalid. Also, it is an error to reference a register which does not exist, or a memory address beyond the size of the memory.</p>
+<p>Note that some common operations are absent from this instruction set. For example, there is no <code>add</code> operation, however <code>a+b</code> can be replaced by <code>a-(0-b)</code>. Also, there are no jump or conditional jump operations. Those can be replaced by manipulating the value stored in register <code>r0</code> (IP).</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="a-few-simple-problems"><a class="header" href="#a-few-simple-problems">A few simple problems</a></h1>
+<h2 id="lifetimes"><a class="header" href="#lifetimes">Lifetimes</a></h2>
+<p>You can create a &quot;problems&quot; Rust project in your repository to try your solutions to those simple problems.</p>
+<p>The <code>trim</code> method on <code>str</code> (and thus on <code>String</code> thanks to <code>Deref</code>) removes the blanks at the beginning and at the end of a string. Its signature is:</p>
+<pre><code class="language-rust no_run noplayground">fn trim(&amp;self) -&gt; &amp;str;</code></pre>
+<p>which is, thanks to lifetimes elision, a shortcut for</p>
+<pre><code class="language-rust no_run noplayground">fn trim&lt;'a&gt;(&amp;'a self) -&gt; &amp;'a str;</code></pre>
+<h3 id="who-is-the-owner"><a class="header" href="#who-is-the-owner">Who is the owner?</a></h3>
+<p>The following code fails to compile:</p>
+<pre><pre class="playground"><code class="language-rust">fn ret_string() -&gt; String {
+    String::from(&quot;  A String object  &quot;)
+}
+
+fn main() {
+    let s = ret_string().trim();
+    assert_eq!(s, &quot;A String object&quot;);
+}</code></pre></pre>
+<p>Why? Ask yourself: what is the lifetime of <code>s</code>? Who is the owner of the underlying string with spaces (every object has an owner)?</p>
+<p>❎ Fix the code so that it compiles (and the <code>s</code> variable represents the trimmed string). Note that you can reuse the same variable name.</p>
+<h3 id="select-between-alternatives"><a class="header" href="#select-between-alternatives">Select between alternatives</a></h3>
+<p>❎ Add the most appropriate lifetimes to the following function:</p>
+<pre><code class="language-rust no_run noplayground">fn choose_str(s1: &amp;str, s2: &amp;str, select_s1: bool) -&gt; &amp;str {
+    if select_s1 { s1 } else { s2 }
+}</code></pre>
+<p>At call time, <code>s1</code> and <code>s2</code> may have different lifetimes and we don't want any constraint between the lifetimes of those two strings.</p>
+<h3 id="write-a-oor-owned-or-ref-type"><a class="header" href="#write-a-oor-owned-or-ref-type">Write a OOR (owned or ref) type</a></h3>
+<p><em>For this problem, do not look at the standard <code>Cow</code> type.</em></p>
+<p>We want to create a <code>OOR</code> type which can store either a <code>String</code> or a <code>&amp;str</code> to avoid copying a string which already exists in the environment.</p>
+<p>❎ Write a <code>OOR</code> enum with two alternatives: <code>Owned</code> which stored a <code>String</code> and <code>Borrowed</code> which stores a <code>&amp;str</code>.</p>
+<p>It will require using a generic parameter. What does it represent?</p>
+<p>❎ Implement the <a href="https://doc.rust-lang.org/std/ops/trait.Deref.html"><code>Deref</code></a> trait for the <code>OOR</code> structure so that it dereferences into an a <code>&amp;str</code>. What is the lifetime of the resulting <code>&amp;str</code> (note that you have no choice there)? Why is that always appropriate?</p>
+<p>❎ Check that you can now call <code>&amp;str</code> methods directly on an arbitrary <code>OOR</code> object by writing some tests.</p>
+<p>❎ Write a <a href="https://doc.rust-lang.org/std/ops/trait.DerefMut.html"><code>DerefMut</code></a> trait for the <code>OOR</code> structure. If you have not stored a <code>String</code>, you will have to mutate and store a <code>String</code> before you can hand out a <code>&amp;mut str</code> because you can't transform your inner <code>&amp;str</code> into <code>&amp;mut str</code>.</p>
+<p>❎ Check that you can run the following test:</p>
+<pre><code class="language-rust no_run noplayground">// Check Deref for both variants of OOR
+let s1 = OOR::Owned(String::from(&quot;  Hello, world.  &quot;));
+assert_eq!(s1.trim(), &quot;Hello, world.&quot;);
+let mut s2 = OOR::Borrowed(&quot;  Hello, world!  &quot;);
+assert_eq!(s2.trim(), &quot;Hello, world!&quot;);
+
+// Check choose
+let s = choose_str(&amp;s1, &amp;s2, true);
+assert_eq!(s.trim(), &quot;Hello, world.&quot;);
+let s = choose_str(&amp;s1, &amp;s2, false);
+assert_eq!(s.trim(), &quot;Hello, world!&quot;);
+
+// Check DerefMut, a borrowed string should become owned
+assert!(matches!(s1, OOR::Owned(_)));
+assert!(matches!(s2, OOR::Borrowed(_)));
+unsafe {
+    for c in s2.as_bytes_mut() {
+        if *c == b'!' {
+            *c = b'?';
+        }
+    }
+}
+assert!(matches!(s2, OOR::Owned(_)));
+assert_eq!(s2.trim(), &quot;Hello, world?&quot;);</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="led-matrix-lab"><a class="header" href="#led-matrix-lab">LED matrix lab</a></h1>
+<p>The goal of this lab is to duplicate what has been done in C in the <a href="https://se203.telecom-paris.fr/tp/">SE203 bare board programmation lab</a>
+<em>(French)</em> in Rust. We will use higher level constructs, and skip all the parts that are not strictly necessary.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="initial-setup"><a class="header" href="#initial-setup">Initial setup</a></h1>
+<h2 id="install-the-necessary-components-and-tools"><a class="header" href="#install-the-necessary-components-and-tools">Install the necessary components and tools</a></h2>
+<p>We will use the following tools and components, make sure that they are installed by using the provided instructions.</p>
+<p>❎ Install the tools described below.</p>
+<h3 id="cargo-edit"><a class="header" href="#cargo-edit">cargo-edit</a></h3>
+<p><code>cargo-edit</code> provides the <code>cargo add</code> subcommand which lets you add dependencies easily to your project:</p>
+<pre><code class="language-bash">$ cargo install cargo-edit
+</code></pre>
+<h3 id="cargo-binutils"><a class="header" href="#cargo-binutils">cargo-binutils</a></h3>
+<p><code>cargo-binutils</code> provides the <code>cargo size</code> subcommand and requires the <code>llvm-tools-preview</code> component:</p>
+<pre><code class="language-bash">$ rustup component add llvm-tools-preview
+$ cargo install cargo-binutils
+</code></pre>
+<h3 id="probe-rs-cli-and-probe-run"><a class="header" href="#probe-rs-cli-and-probe-run">probe-rs-cli and probe-run</a></h3>
+<p>We will use those two tools later:</p>
+<pre><code class="language-bash">$ cargo install probe-rs-cli probe-run
+</code></pre>
+<p>You might need to install the <code>libudev-dev</code> package on Debian and Ubuntu systems.</p>
+<h2 id="create-the-project"><a class="header" href="#create-the-project">Create the project</a></h2>
+<p>❎ In your git repository, create a <code>tp-led-matrix</code> new library project. Use <code>cargo new --help</code> if you are not sure of the arguments to pass to <code>cargo new</code> to create a library project.</p>
+<p>At every step you are expected to check that your project compiles fine and without any warning. It must be kept formatted at all time (using <code>cargo fmt</code>), and you can use <code>cargo clippy</code> to keep it tidy and get advices on what to change.</p>
+<h2 id="no_std"><a class="header" href="#no_std">no_std</a></h2>
+<p>Since our program will run in an embedded context, we cannot use the standard library. We must declare in our <code>src/lib.rs</code> file that we do not use any standard library imports.</p>
+<p>❎ Add the <a href="https://doc.rust-lang.org/reference/attributes.html">inner attribute</a> <code>no_std</code> to your library.</p>
+<p>Since this attribute applies to the whole library, it must be indicated as follows: <code>#![no_std]</code>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="visual-data-structures"><a class="header" href="#visual-data-structures">Visual data structures</a></h1>
+<p>We will start by building some useful types to manipulate pixel information.</p>
+<p>❎ Start by creating a public <code>image</code> module in your project. The types in this section will be created in this module.</p>
+<p>We will now build two data structures</p>
+<ul>
+<li><a href="labs/led-matrix/color.html"><code>Color</code></a> will represent an individual RGB pixel</li>
+<li><a href="labs/led-matrix/image.html"><code>Image</code></a> will represent a whole 8×8 image made of pixels</li>
+</ul>
+<p>that we will later <a href="labs/led-matrix/reexport.html">reexport</a> from the library top-level module. Do not reexport anything yet.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="color"><a class="header" href="#color">Color</a></h1>
+<p>❎ Create a <code>image::Color</code> structure containing three unsigned bytes named after the primary colors used in the led matrix: <code>r</code>, <code>g</code> and <code>b</code>.</p>
+<p>❎ Since copying a <code>Color</code> (3 bytes) is cheap, make it automatically derive <code>Copy</code> (and <code>Clone</code> which is needed for <code>Copy</code>).</p>
+<p>❎ The default initialization of the structure would set all integer fields to 0, which is a perfect default for a color as it represents black. Make <code>Color</code> automatically derive <code>Default</code>.</p>
+<p>❎ Implement three public constants <code>Color::RED</code>, <code>Color::GREEN</code> and <code>Color::BLUE</code> initialized to the correct values for those three primary colors.</p>
+<h2 id="gamma-correction"><a class="header" href="#gamma-correction">Gamma correction</a></h2>
+<p>The led matrix requires some <a href="https://en.wikipedia.org/wiki/Gamma_correction">gamma correction</a> to represent colors as our eyes can see them. <a href="labs/led-matrix/resources/gamma.txt">This gamma correction table</a> works fine with our led matrix.</p>
+<p>❎ Add a <code>gamma</code> module to the project containing the above-mentioned gamma table and a function <code>pub fn gamma_correct(x: u8) -&gt; u8</code> which returns the corresponding value in the table.</p>
+<p>❎ Implement a <code>pub fn gamma_correct(&amp;self) -&gt; Self</code> method on <code>Color</code> which applies the <code>gamma::gamma_correct</code> correction to all components of a color.</p>
+<h2 id="color-multiplication-and-division"><a class="header" href="#color-multiplication-and-division">Color multiplication and division</a></h2>
+<p>We would like to be able to take a color and make it more or less vibrant by multiplying or dividing it by a floating point value. Since we do not have access to the standard library, we will implement traits coming directly from <code>core::ops</code> instead of importing them from <code>std::ops</code>.</p>
+<p>However, in <code>no_std</code> mode we do not have access to standad operations on floating point operands. We will have to use an external crate such as <code>micromath</code> to get those operations.</p>
+<p>❎ Add the <code>micromath</code> crate to your project, and use <code>micromath::F32Ext</code> in your <code>image</code> module to get common operations back.</p>
+<p>❎ Implement the trait <code>core::ops::Mul&lt;f32&gt;</code> on <code>Color</code> and make it return another <code>Color</code> whose individual components are multiplied by the given floating point value. You might want to use a helper function to ensure that each component stays within the range of an <code>u8</code>.</p>
+<p>❎ Implement the trait <code>core::ops::Div&lt;f32&gt;</code> on <code>Color</code> and make it return another <code>Color</code> whose individual components are divided by the given floating point value. Note that you can use the multiplication defined above to implement this more concisely.</p>
+<p>That's it, our <code>Color</code> type is complete.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="image"><a class="header" href="#image">Image</a></h1>
+<p>We want to manipulate images as a whole. Images are a collection of 64 <code>Color</code> pixels.</p>
+<p>❎ Create a public structure <code>image::Image</code> containing a unique unnamed field consisting of an array of 64 <code>Color</code>. Structure with unnamed fields are declared as follow, and fields are access like tuple fields (<code>.0</code> to access the first field, <code>.1</code> to access the second field, …):</p>
+<pre><code class="language-rust no_run noplayground">struct Image([Color; 64]);</code></pre>
+<p>❎ Create a public function <code>pub fn new_solid(color: Color) -&gt; Self</code> on <code>Image</code> which returns an image filled with the color given as an argument.</p>
+<h4 id="default-trait"><a class="header" href="#default-trait">Default trait</a></h4>
+<p>Unfortunately, the trait <code>Default</code> cannot be derived automatically for <code>Image</code> because of a temporary technical limitation of the Rust language: arrays with more than 32 entries cannot have <code>Default</code> derived automatically. However, nothing prevents us from implementing the <code>Default</code> trait manually.</p>
+<p>❎ Implement the <code>Default</code> trait for <code>Image</code> by making it return an image filled with the default color.</p>
+<h4 id="individual-pixel-access"><a class="header" href="#individual-pixel-access">Individual pixel access</a></h4>
+<p>We want to be able to access an individual pixel of an image by using an expression such as <code>my_image[(row, column)]</code>. For doing so, we want to implement two traits, <code>Index</code> and <code>IndexMut</code>, which allow indexing into our data structure. Fortunately, Rust lets us use any type as an index, so a <code>(usize, usize)</code> couple looks perfectly appropriate.</p>
+<p>❎ Implement the <code>core::ops::Index&lt;(usize, usize)&gt;</code> trait on <code>Image</code> with output type <code>Color</code>.</p>
+<p>❎ Implement the <code>core::ops::IndexMut&lt;(usize, usize)&gt;</code> trait on <code>Image</code>. Note that you do not specify the output type as it is necessarily identical to the one defined in <code>Index</code>, as <code>IndexMut</code> can only be implemented on types also implementing <code>Index</code> with the same index type.</p>
+<h4 id="row-access"><a class="header" href="#row-access">Row access</a></h4>
+<p>Since we will display the image one row at a time on the led matrix, it might be useful to have a method giving access to the content of one particular row.</p>
+<p>❎ Add a <code>pub fn row(&amp;self, row: usize) -&gt; &amp;[Color]</code> on <code>Image</code> referencing the content of a particular row.</p>
+<p>Note how the reference will stay valid no longer than the image itself; for this reason, Rust lets us take a reference inside a structure without any risk for the reference to become invalid if the image is destroyed.</p>
+<h4 id="gradient"><a class="header" href="#gradient">Gradient</a></h4>
+<p>For visual testing purpose, we would like to be able to build a gradient from a given color to black. Each pixel should receive the reference color divided by <code>(1 + row * row + col)</code>.</p>
+<p>❎ Using the <code>image[(row, col)]</code> utilities defined in previous steps, implement a <code>pub fn gradient(color: Color) -&gt; Self</code> function returning an image containing a gradient.</p>
+<h4 id="image-as-an-array-of-bytes"><a class="header" href="#image-as-an-array-of-bytes">Image as an array of bytes</a></h4>
+<p>We already know from the SE203 lab that we will receive image bytes from the serial port, and that we will build the image byte by byte. It would be much easier if we could also see the image as a slice and access the individual bytes.</p>
+<p>Remember that Rust is allowed to reorder, group, or otherwise rearrange fields in a struct. It means that so far we have no idea of how the <code>Color</code> type is organized in memory. Maybe each field is stored on 32 bits instead of 8, or maybe <code>g</code> is stored first, before <code>r</code> and <code>b</code>. We will use a representation clause to force Rust to make each field 8 bits wide, to have a one byte alignment only on the structure, and to keep <code>r</code>, <code>g</code> and <code>b</code> in the order we have chosen.</p>
+<p>❎ Force Rust to use a C compatible representation for <code>Color</code> by using the appropriate <code>repr(C)</code> attribute. It will ensure all properties mentioned above.</p>
+<p>Concerning the <code>Image</code> type itself, we do not have much to do. We already know that Rust arrays are guaranteed to be layed out according to the size and alignment requirements of the element type. In our case, it means that the three bytes of the first pixel will be immediately followed by the three bytes of the second pixel, and so on.</p>
+<p>However, to guarantee that Rust uses the same representation for <code>Image</code> as the one it uses for the inner array, we need to request that the <code>Image</code> type is transparent, i.e., that it uses the same representation as its unique non-zero-sized field.</p>
+<p>❎ Add a <code>repr(transparent)</code> attribute on the <code>Image</code> type to ensure that it keeps the same representation as its unique element.</p>
+<p>To see an image as an immutable array of bytes, we will implement the <code>AsRef&lt;[u8; 192]&gt;</code> trait. This way, using <code>my_image.as_ref()</code> will return a reference to an array of 192 (8 rows × 8 columns × 3 color bytes) individual bytes.</p>
+<p>❎ Implement <code>AsRef&lt;[u8; 192]&gt;</code> for <code>Image</code>. You will need to use <code>core::mem::transmute()</code>, which is an <em>unsafe</em> function, in order to convert <code>self</code> to the desired return value.</p>
+<p>❎ Since we know we will need a mutable reference to the individual bytes, implement <code>AsMut&lt;[u8; 192]&gt;</code> the same way.</p>
+<p>Congratulations, you now have a rock-solid <code>Image</code> type which will make the rest of the job easier.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="reexporting-types"><a class="header" href="#reexporting-types">Reexporting types</a></h1>
+<p>Users of the library are likely to want to use our <code>Color</code> and <code>Image</code> types. We can make it easier for them by reexporting them in <code>lib.rs</code>.</p>
+<p>❎ Using the appropriate <code>pub use</code>, reexport <code>Color</code> and <code>Image</code> from the top of the library.</p>
+<p>From now on, users will be able to do:</p>
+<pre><code class="language-rust no_run noplayground">use tp_led_matrix::{Color, Image};</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="embedded-mode"><a class="header" href="#embedded-mode">Embedded mode</a></h1>
+<p>We will now configure our (yet non-existent) Rust program so that it generates code for our IoT-node board. It requires a few setup steps, then all will be automated by Cargo.</p>
+<p>We will need to:</p>
+<ul>
+<li><a href="labs/led-matrix/toolchain.html">configure the toolchain</a> so that we can be a first empty program;</li>
+<li><a href="labs/led-matrix/uploading.html">upload it to the board</a> using Segger JLink tools;</li>
+<li><a href="labs/led-matrix/execution.html">make the program display something</a>;</li>
+<li><a href="labs/led-matrix/optimize-setup.html">optimize our development environment</a>;</li>
+<li><a href="labs/led-matrix/hal.html">configure the peripherals</a> we want to use;</li>
+<li><a href="labs/led-matrix/matrix.html">lit the LED matrix</a>.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="configuring-the-toolchain"><a class="header" href="#configuring-the-toolchain">Configuring the toolchain</a></h1>
+<p>We will ensure that we are able to compile and link an empty program, and upload it to the board.</p>
+<h2 id="choosing-the-target-for-the-library"><a class="header" href="#choosing-the-target-for-the-library">Choosing the target for the library</a></h2>
+<p>Our board uses a STM32L475VGT6 microcontroller which contains a Cortex-M4F core. We need to download the corresponding target so that Rust can cross-compile for it.</p>
+<p>❎ Add the <code> thumbv7em-none-eabihf</code> target using <code>rustup</code>:</p>
+<pre><code class="language-bash">$ rustup target add thumbv7em-none-eabihf
+</code></pre>
+<p>We will build our code for this target by default, this can be configured in <code>.cargo/config.toml</code> as this is specific to our build process.</p>
+<p>❎ Create <code>.cargo/config.toml</code> and configure the default target to use when compiling:</p>
+<pre><code class="language-toml">[build]
+target = &quot;thumbv7em-none-eabihf&quot; # Cortex-M4F/M7F (with FPU)
+</code></pre>
+<p>❎ Check that Rust can cross-compile your current code by using <code>cargo build</code>. You will notice a <code>target/thumbv7em-none-eabihf</code> directory which contains the build artifacts.</p>
+<h2 id="choosing-the-runtime-support-package-to-build-an-executable"><a class="header" href="#choosing-the-runtime-support-package-to-build-an-executable">Choosing the runtime support package to build an executable</a></h2>
+<p>We are not able to build a library, but we do not have an executable program yet. In order to do this, we will need to provide:</p>
+<ul>
+<li>a linker script</li>
+<li>the linker arguments</li>
+<li>a main program</li>
+<li>an implementation of the panic handler so that Rust knows what to do if there is a panic</li>
+</ul>
+<h3 id="linker-script-and-linker-arguments"><a class="header" href="#linker-script-and-linker-arguments">Linker script and linker arguments</a></h3>
+<p>We could write a whole linker script as was done in the SE203 lab, but this is not necessary. The <a href="https://docs.rs/cortex-m-rt/latest/cortex_m_rt/"><code>cortex-m-rt</code> crate</a> provides a linker script as well as a <code>#[entry]</code> attribute and builds a complete program for Cortex-M based microcontrollers, including a vector table.</p>
+<p>The linker script is named <code>link.x</code> and will be placed in the linker search path. However, this script includes a <code>memory.x</code> which describes the memory regions, and we will have to provide this linker script fragment and place it at the right place.</p>
+<p>❎ Add a dependency to the <code>cortex-m-rt</code> crate.</p>
+<p>❎ Write a <code>memory.x</code> file, next to <code>Cargo.toml</code>, containing:</p>
+<pre><code class="language-ld">MEMORY
+{
+  FLASH : ORIGIN = 0x08000000, LENGTH = 1M
+  RAM   : ORIGIN = 0x20000000, LENGTH = 96K
+}
+</code></pre>
+<p>We must tell the linker to use the <code>link.x</code> script provided by the <code>cortex-m-rt</code> crate when compiling for <code>arm-none-…</code>.</p>
+<p>❎ Add the following conditional section to the <code>.cargo/config.toml</code> file:</p>
+<pre><code class="language-toml">[target.'cfg(all(target_arch = &quot;arm&quot;, target_os = &quot;none&quot;))']
+rustflags = [&quot;-C&quot;, &quot;link-arg=-Tlink.x&quot;]
+</code></pre>
+<h3 id="peripheral-access-crate"><a class="header" href="#peripheral-access-crate">Peripheral access crate</a></h3>
+<p>The only thing missing that <code>cortex-m-rt</code> link scripts will require is a vector table. Since this depends on our device, we must add one for the STM32L475VGT6 microcontroller by importing a peripheral access crate (PAC) even though we won't use any of its Rust code.</p>
+<p>❎ Add <code>stm32l4</code> as a dependency with the feature <code>stm32l4x5</code>.</p>
+<p>We will later import it from main in order to link it but without binding any name.</p>
+<h3 id="main-program"><a class="header" href="#main-program">Main program</a></h3>
+<p>We want to have an executable program named <code>tp-led-matrix</code>, located in <code>src/main.rs</code>. While a crate may contain only one library, it may contain several executables. The TOML syntax to describe an element of a list is to use a double bracket.</p>
+<p>❎ Give the name of the executable for Cargo in your <code>Cargo.toml</code>:</p>
+<pre><code class="language-toml">[[bin]]
+name = &quot;tp-led-matrix&quot;
+</code></pre>
+<p>Now, we can write our main program. We will run in <code>no_std</code> mode, and with <code>no_main</code>. We will use <code>cortex-m-rt</code>'s <code>entry</code> attribute to define what our entry point should be. This entry point must never return, hence the use of the <code>!</code> (never) type.</p>
+<p>❎ Create <code>src/main.rs</code> with this code in it:</p>
+<pre><code class="language-rust no_run noplayground">#![no_std]
+#![no_main]
+
+use cortex_m_rt::entry;
+use stm32l4 as _;   // Just to link it in the executable (it provides the vector table)
+
+#[panic_handler]
+fn panic_handler(_panic_info: &amp;core::panic::PanicInfo) -&gt; ! {
+    loop {}
+}
+
+#[entry]
+fn main() -&gt; ! {
+    panic!(&quot;The program stopped&quot;);
+}</code></pre>
+<p>Note that we need to define a panic handler, because otherwise Rust doesn't know what to do in case of a panic. You can either define one yourself as we did there, or use and import a crate such as <code>panic-halt</code> which also does an infinite loop.</p>
+<h2 id="program-building"><a class="header" href="#program-building">Program building</a></h2>
+<p>❎ Build the program in both debug and release modes using <code>cargo build</code> and <code>cargo build --release</code>.</p>
+<p>❎ Look at the executable size with the <code>arm-none-eabi-size</code> program. The executables for the debug and the release modes are stored respectively in <code>target/thumbv7em-none-eabihf/debug/tp-led-matrix</code> and <code>target/thumbv7em-none-eabihf/release/tp-led-matrix</code>.</p>
+<p>❎ Stop hurting yourself trying to type long path names, and use <code>cargo size</code> and <code>cargo size --release</code> instead. This tool builds the right version (debug or release mode) and calls <code>size</code> on it.</p>
+<h2 id="documentation"><a class="header" href="#documentation">Documentation</a></h2>
+<p>The PAC and HAL crates have been written with many microcontrollers in mind. For example, the <code>stm32l4</code> crate supports several microcontrollers from the STM32L4 family, including our STM32L475VGT6. Features flags will cause the use of macros to generate the various methods and modules appropriate for the targeted microcontroller.</p>
+<p>However, this makes the online documentation unsuitable for proper use: only the generic methods and modules will be included, and it will be hard to find help on a functionality which is specific to our microcontrollers. Fortunately, <code>cargo doc</code> can generate documentation according to our crate dependencies and their feature flags.</p>
+<p>❎ Generate the documentation using <code>cargo doc</code>.</p>
+<p>❎ Open the file <code>target/thumbv7em-none-eabihf/doc/settings.html</code> in your browser, for example by using <code>firefox target/thumbv7em-none-eabihf/doc/settings.html</code>, and search for a method (for example <code>gamma_correct</code>).</p>
+<p>You should regenerate the documentation every time you update your dependencies and when you significantly update your code, by rerunning <code>cargo doc</code>. It will only regenerate the documentation for things that have changed.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="uploading-the-program-to-the-board-using-segger-jlink-tools"><a class="header" href="#uploading-the-program-to-the-board-using-segger-jlink-tools">Uploading the program to the board using Segger JLink tools</a></h1>
+<p>Even though this program does nothing, we want to upload it to the board. For this, we will use Segger JLink tool suite, as explained in <a href="https://sen.enst.fr/se203/td-mise-en-oeuvre-d-une-application-embarquee/introduction">SE203 lab</a>.</p>
+<p>❎ Ensure that you have either one of <code>arm-none-eabi-gdb</code> or <code>gdb-multiarch</code> installed on your system. If this is not the case, install it before proceeding.</p>
+<p>❎ In a dedicated terminal, launch <code>JLinkGDBServer -device STM32L475VG</code>.</p>
+<p>We need to configure <code>gdb</code> so that it connects to the JLinkGDBServer program and uploads the program.</p>
+<p>❎ Create a <code>jlink.gdb</code> gdb script containing the commands to connect to JLinkGDBServer, upload and run the debugged program:</p>
+<pre><code class="language-gdb">target extended-remote :2331
+load
+mon reset
+c
+</code></pre>
+<p>We would like <code>cargo run</code> to automatically launch gdb with the script we just wrote. Fortunately, the runner can be configured as well!</p>
+<p>❎ In <code>.cargo/config.toml</code>, add the following to the conditional <code>target</code> section you created earlier:</p>
+<pre><code class="language-toml">runner = &quot;arm-none-eabi-gdb -q -x jlink.gdb&quot;
+</code></pre>
+<p>⚠ On some systems, one must use <code>gdb-multiarch</code> instead of <code>arm-none-eabi-gdb</code>, check which executable is available.</p>
+<p>❎ Upload and run your program using <code>cargo run</code> while your board is connected. You should be able to interrupt gdb using <code>ctrl-c</code> and see that you are indeed looping in the panic handler function.</p>
+<p>Congratulations: you are running your first embedded Rust program on a real board.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="displaying-something"><a class="header" href="#displaying-something">Displaying something</a></h1>
+<p>Now that we have a running program, we would like to have one which displays something. Segger JLink tool suite can use the <a href="https://www.segger.com/products/debug-probes/j-link/technology/about-real-time-transfer/">RTT</a> protocol to exchange data between the host and the target. This protocol uses in-memory buffers that are scanned by the JLink debugging probe and transferred between the host and the target.</p>
+<h2 id="using-rtt-on-your-board"><a class="header" href="#using-rtt-on-your-board">Using RTT on your board</a></h2>
+<p>Fortunately, several crates exist that implement the RTT protocol in Rust on the target side:</p>
+<ul>
+<li><code>rtt-target</code> implements the RTT protocol and defines macros such as <code>rprintln!()</code> to send formatted data to the host</li>
+<li><code>panic-rtt-target</code> implements a panic handler using RTT, so that you can see the full panic message on the host</li>
+</ul>
+<p>❎ Add those two crates as dependencies, with the <code>cortex-m</code> feature flag for <code>panic-rtt-target</code>.</p>
+<p><code>rtt-target</code> needs an implementation of a <a href="https://github.com/rust-embedded/critical-section">critical section</a>. In our case, we can use the one provided by the <code>critical-section-single-core</code> feature on the <code>cortex-m</code> crate.</p>
+<p>❎ Add the <code>cortex-m</code> crate with the <code>critical-section-single-core</code> feature enabled.</p>
+<p>❎ In <code>src/main.rs</code>, remove your panic handler and import <code>panic_rtt_target</code> so that its panic handler is linked in. Since we won't be using any symbol explicitly, we can import it silently:</p>
+<pre><code class="language-rust no_run noplayground">use panic_rtt_target as _;</code></pre>
+<p>❎ Import the <code>rtt_init_print</code> and <code>rprintln</code> macros. Modify the main program so that it uses them:</p>
+<pre><code class="language-rust no_run noplayground">#[entry]
+fn main() -&gt; ! {
+    rtt_init_print!();
+    rprintln!(&quot;Hello, world!&quot;);
+    panic!(&quot;The program stopped&quot;);
+ }</code></pre>
+<p>❎ In a terminal, launch <code>JLinkRTTClient</code>. This is a simple client that connects to a running <code>JLinkGDBServer</code>.</p>
+<p>❎ Compile and run the program on the board using <code>cargo run --release</code>. You should be able to see the output from the program.</p>
+<p>Debugging will be much easier this way!</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="optimizing-the-setup"><a class="header" href="#optimizing-the-setup">Optimizing the setup</a></h1>
+<p>We will take some steps to ease our development process and save some time later.</p>
+<h2 id="reduce-binary-size"><a class="header" href="#reduce-binary-size">Reduce binary size</a></h2>
+<p>Using <code>cargo size</code> and <code>cargo size --release</code>, we can see that the binary produced in release mode is much smaller than the one produced in debug mode. Note that <code>size</code> doesn't display the debug information since those are never stored in the target memory.</p>
+<p>We would like to use <code>--release</code> to keep an optimized binary, but we would like to keep the debug information in case we need to use <code>gdb</code>, or to have a better backtrace in case of panic. Fortunately,
+we can do that with <code>cargo</code> and require that the <code>release</code> profile:</p>
+<ul>
+<li>keeps debug symbols;</li>
+<li>uses <a href="https://en.wikipedia.org/wiki/Interprocedural_optimization">link-time-optimization (LTO)</a> to optimize the produced binary even further;</li>
+<li>generates objects one by one to get an even better optimization.</li>
+</ul>
+<p>❎ To do so, add the following section to your program <code>Cargo.toml</code>:</p>
+<pre><code class="language-toml">[profile.release]
+debug = true      # symbols are nice and they don't increase the size on the target
+lto = true        # better optimizations
+codegen-units = 1 # better optimizations
+</code></pre>
+<p>From now on, we will always use <code>--release</code> when building binaries and those will be optimized fully and contain debugging symbols.</p>
+<h2 id="make-it-simplier-to-run-the-program"><a class="header" href="#make-it-simplier-to-run-the-program">Make it simplier to run the program</a></h2>
+<p>Even though we have configured <code>cargo run</code> so that it runs <code>gdb</code> automatically and uploads our program, we still have to start <code>JLinkGDBServer</code> and <code>JLinkRTTClient</code>. Fortunately, the <a href="https://github.com/probe-rs/probe-rs"><code>probe-rs</code></a> and <code>knurling-rs</code> projects make it easy to develop embedded Rust programs:</p>
+<ul>
+<li><code>probe-rs-cli</code> lets you manipulate the probes connected to your computer, such as the probe located on your IoT-node board.</li>
+<li><code>probe-run</code> lets you run your compiled program and uses RTT to get information.</li>
+<li><code>defmt</code> (for <em>deferred formatting</em>) is a logging library and set of tools that lets you log events from your embedded programs and transmit them in an efficient binary format. The formatting for the developer consumption will be made by tools running on the host rather than on the target. <code>probe-run</code> is able to get <code>defmt</code> traces using a RTT channel and decode and format them.</li>
+</ul>
+<p>Many others programs such as <code>cargo flash</code> or <code>cargo embed</code> exist, but we will not need them here.</p>
+<p>❎ Stop the Segger JLink tools. Using the <code>probe-rs-cli</code> executable, check if the probe on your board is properly detected.</p>
+<p>❎ Use <code>probe-run</code> with the appropriate parameters instead of <code>gdb</code> to upload your program onto the board and run it. Replace your runner in <code>.cargo/config.toml</code> by:</p>
+<pre><code class="language-toml">runner = &quot;probe-run --chip stm32l475vg&quot;
+</code></pre>
+<p>❎ Using <code>cargo run --release</code>, look at your program being compiled, uploaded and run on your board. You should see the messages sent over RTT on your screen.</p>
+<p>⚠ You can use <code>ctrl-c</code> to quit <code>probe-run</code>.</p>
+<h2 id="use-defmt-for-logging"><a class="header" href="#use-defmt-for-logging">Use defmt for logging</a></h2>
+<p>Instead of using RTT directly, we will use <code>defmt</code> to have a better and efficient logging system.</p>
+<p>❎ Remove the <code>rtt-target</code> and <code>panic-rtt-target</code> from your dependencies in <code>Cargo.toml</code>.</p>
+<p>❎ Add the <code>defmt</code> and <code>defmt-rtt</code> dependencies to your <code>Cargo.toml</code>.</p>
+<p>❎ Add the <code>panic-probe</code> dependency to your <code>Cargo.toml</code> with the <code>print-defmt</code> feature.</p>
+<p><code>defmt-rtt</code> is the RTT transport library for <code>defmt</code>. <code>panic-probe</code> with the <code>print-defmt</code> feature will indicate to <code>probe-run</code> the panic message to display using defmt and will tell it to stop in case of a panic.</p>
+<p>❎ <code>defmt</code> uses a special section in your executable. In <code>.cargo/config.toml</code>, add the following to your existing <code>rustflags</code> in order to include the provided linker file fragment: <code>&quot;-C&quot;, &quot;link-arg=-Tdefmt.x&quot;</code>.</p>
+<p>❎ Modify your code in <code>src/main.rs</code> to include the following changes:</p>
+<ul>
+<li>Write <code>use panic_probe as _;</code> instead of <code>panic_rtt_target</code> to use the <code>panic-probe</code> crate.</li>
+<li>Write <code>use defmt_rtt as _;</code> to link with the <code>defmtt-rtt</code> library.</li>
+<li>Remove use of <code>rtt_target</code> items.</li>
+<li>Remove <code>rtt_init_print!()</code>, and replace <code>rprintln!()</code> with <code>defmt::info!()</code> to print a message.</li>
+</ul>
+<p>❎ Run your program using <code>cargo run --release</code>. Notice that you see the panic information, but you do not see the &quot;Hello, world!&quot; message.</p>
+<p>By default, <code>defmt</code> only prints errors. The various log level are <code>trace</code>, <code>debug</code>, <code>info</code>, <code>warn</code>, and <code>error</code>. If you want to see the messages of level <code>info</code> and above (<code>info</code>, <code>warn</code>, and <code>error</code>), you must set the <code>DEFMT_LOG</code> environment variable when building and when running the program. Only the appropriate information will be included at build time and displayed at run time.</p>
+<p>❎ Build and run your program using <code>DEFMT_LOG=info cargo run --release</code>. You will see the &quot;Hello, world!&quot; message. Note that you could also have used <code>DEFMT_LOG=trace</code> or <code>DEFMT_LOG=debug</code> since</p>
+<p>🎉 Your environment is fully setup in an efficient way. If needed, you can revert to using <code>gdb</code> and Segger JLink tools, but that should be reserved to extreme cases.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="configuring-the-hardware"><a class="header" href="#configuring-the-hardware">Configuring the hardware</a></h1>
+<p>So far, we have not configured our hardware at all. The board is running with its initial setup on the 16MHz HSI clock, and only the debug interface is active. All other peripherals are still in their initial state.</p>
+<h2 id="adding-a-pac--a-hal"><a class="header" href="#adding-a-pac--a-hal">Adding a PAC / a HAL</a></h2>
+<p>Several crates may be interesting to configure and access the hardware of the STM32L475VGT6 more easily:</p>
+<ul>
+<li><a href="https://docs.rs/cortex-m/latest/cortex_m/">cortex-m</a> provides access to functionalities common to all Cortex-M based microcontrollers</li>
+<li><a href="https://docs.rs/stm32l4/latest/stm32l4/">stm32l4</a> is a <em>peripheral access crate (PAC)</em> automatically generated from <a href="https://www.keil.com/pack/doc/CMSIS/SVD/html/svd_Format_pg.html">SVD files</a> provided by ST Microelectronics describing each peripheral register existing in the microcontroller</li>
+<li><a href="https://docs.rs/stm32l4xx-hal/latest/stm32l4xx_hal/">stm32l4xx-hal</a> is a <em>hardware abstraction layer (HAL)</em> using both crates mentioned above to provide higher-level functionalities, this is the one we will be using</li>
+</ul>
+<p>❎ Remove the <code>stm32l4</code> dependency as we will use it through the HAL instead.</p>
+<p>❎ Add <code>stm32l4xx-hal</code> to <code>Cargo.toml</code> as a dependency with the <code>stm32l475</code> and <code>rt</code> features, using a particular recent version from git:</p>
+<pre><code class="language-toml">stm32l4xx-hal = { git = &quot;https://github.com/stm32-rs/stm32l4xx-hal&quot;,
+                  features = [&quot;stm32l475&quot;, &quot;rt&quot;],
+                  rev = &quot;46006b9e2c2d2ea5ea9a00409505e17d16279e1f&quot; }
+</code></pre>
+<p>(you can use a long line, it has been cut here for formatting purpose only)</p>
+<p>❎ Add the following imports to your <code>main.rs</code> (instead of <code>stm32l4</code>) so that you can get an easy access to the HAL features as well as to the reexport of the PAC:</p>
+<pre><code class="language-rust no_run noplayground">use stm32l4xx_hal::{pac, prelude::*};</code></pre>
+<p>❎ Since Visual Studio code that many use as an IDE does not always play nice with macros and errors, split your <code>main()</code> into a <code>main()</code> and a <code>run()</code> functions:</p>
+<pre><code class="language-rust no_run noplayground">#[entry]
+fn main() -&gt; ! {
+    let cp = pac::CorePeripherals::take().unwrap();
+    let dp = pac::Peripherals::take().unwrap();
+
+    run(cp, dp)
+}
+
+fn run(_cp: pac::CorePeripherals, dp: pac::Peripherals) -&gt; ! {
+    // Get high-level representations of hardware modules
+    let mut rcc = dp.RCC.constrain();
+    let mut flash = dp.FLASH.constrain();
+    let mut pwr = dp.PWR.constrain(&amp;mut rcc.apb1r1);
+
+    // Setup the clocks at 80MHz using HSI (by default since HSE/MSI are not configured).
+    // The flash wait states will be configured accordingly.
+    let clocks = rcc.cfgr.sysclk(80.MHz()).freeze(&amp;mut flash.acr, &amp;mut pwr);
+
+    defmt::info!(&quot;Hello, world!&quot;);
+    panic!(&quot;The program stopped&quot;);
+}</code></pre>
+<p>Here you can see how the HAL offers high-level features. The <code>RCC</code> register block which controls all clocks has been transferred to the HAL using <code>.constrain()</code>. From here, you can access the various registers such as <code>rcc.apb1r1</code>. For example, the <code>PWR</code> module is transferred to the HAL after being activated in <code>.constrain(&amp;mut rcc.apb1r1)</code>. Here the <code>APB1R1</code> register will be used to enable the <code>PWR</code> module clock automatically.</p>
+<p>Then the <code>CFGR</code> clock configuration register will be setup so that, using only HSI since we haven't enabled other clocks, the system switches to 80MHz after configuring the PLL and configuring the flash wait states. The HAL does the same job as STM32CubeMX, but online instead of offline.</p>
+<p>Congratulations, you have displayed the same thing as before, but with a system running at 80MHz. 👏</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="gpio-and-the-led-matrix"><a class="header" href="#gpio-and-the-led-matrix">GPIO and the LED matrix</a></h1>
+<p>We will now configure and program our LED matrix. It uses 13 GPIO on three different ports.</p>
+<h2 id="hal-and-gpio-representation"><a class="header" href="#hal-and-gpio-representation">HAL and GPIO representation</a></h2>
+<p>The GPIO for a port are enabled and transferred from the PAC to the HAL using the <code>split()</code> method:</p>
+<pre><code class="language-rust no_run noplayground">let mut gpioa = dp.GPIOA.split(&amp;mut rcc.ahb2);</code></pre>
+<p>The <code>gpioa</code> structure then contains 16 fields corresponding to the 16 pins, each with their own type parametrized by their state: <code>gpioa.pa1</code> is of type <code>PA1&lt;Input&lt;Analog&gt;&gt;</code> because this is its default state at microcontroller reset time. It is possible to change its state by calling a method such as <code>.into_push_pull_output()</code> which consumes its argument and returns a new <code>PA1&lt;Output&lt;PushPull&gt;&gt;</code> variable. This way, it is impossible to use the wrong pin (since they each have their own type) or the wrong mode (since this is a generic parameter of the pin type), and all this is verified at compilation time.</p>
+<p>The method <code>.set_speed(…)</code> will allow to change the pin speed as well. The LED matrix requires that the <em>very high speed</em> mode is selected, at least for rapidly changing pins (SDA, SCK, and LAT).</p>
+<p>Care must be taken when manipulating <code>gpioa</code>, as taking its <code>pa1</code> field partially destroys the <code>gpioa</code> structure which can no longer be passed around.</p>
+<h2 id="matrix-module"><a class="header" href="#matrix-module">Matrix module</a></h2>
+<p>❎ Create a public <code>matrix</code> module.</p>
+<p>❎ In the <code>matrix</code> module, import <code>stm32l4xx_hal::gpio::*</code> as well as <code>tp_led_matrix::{Color, Image}</code> (from our library) and define the <code>Matrix</code> structure. It is fully given here to avoid a tedious manual copy operation, as well as all the functions you will have to implement on a <code>Matrix</code>:</p>
+<pre><code class="language-rust no_run noplayground">pub struct Matrix {
+    sb: PC5&lt;Output&lt;PushPull&gt;&gt;,
+    lat: PC4&lt;Output&lt;PushPull&gt;&gt;,
+    rst: PC3&lt;Output&lt;PushPull&gt;&gt;,
+    sck: PB1&lt;Output&lt;PushPull&gt;&gt;,
+    sda: PA4&lt;Output&lt;PushPull&gt;&gt;,
+    c0: PB2&lt;Output&lt;PushPull&gt;&gt;,
+    c1: PA15&lt;Output&lt;PushPull&gt;&gt;,
+    c2: PA2&lt;Output&lt;PushPull&gt;&gt;,
+    c3: PA7&lt;Output&lt;PushPull&gt;&gt;,
+    c4: PA6&lt;Output&lt;PushPull&gt;&gt;,
+    c5: PA5&lt;Output&lt;PushPull&gt;&gt;,
+    c6: PB0&lt;Output&lt;PushPull&gt;&gt;,
+    c7: PA3&lt;Output&lt;PushPull&gt;&gt;,
+}
+
+impl Matrix {
+    /// Create a new matrix from the control registers and the individual
+    /// unconfigured pins. SB and LAT will be set high by default, while
+    /// other pins will be set low. After 100ms, RST will be set high, and
+    /// the bank 0 will be initialized by calling `init_bank0()` on the
+    /// newly constructed structure.
+    /// The pins will be set to very high speed mode.
+    #[allow(clippy::too_many_arguments)]   // Necessary to avoid a clippy warning
+    pub fn new(
+        pa2: PA2&lt;Analog&gt;,
+        pa3: PA3&lt;Analog&gt;,
+        pa4: PA4&lt;Analog&gt;,
+        pa5: PA5&lt;Analog&gt;,
+        pa6: PA6&lt;Analog&gt;,
+        pa7: PA7&lt;Analog&gt;,
+        pa15: PA15&lt;Alternate&lt;PushPull, 0&gt;&gt;,
+        pb0: PB0&lt;Analog&gt;,
+        pb1: PB1&lt;Analog&gt;,
+        pb2: PB2&lt;Analog&gt;,
+        pc3: PC3&lt;Analog&gt;,
+        pc4: PC4&lt;Analog&gt;,
+        pc5: PC5&lt;Analog&gt;,
+        gpioa_moder: &amp;mut MODER&lt;'A'&gt;,
+        gpioa_otyper: &amp;mut OTYPER&lt;'A'&gt;,
+        gpiob_moder: &amp;mut MODER&lt;'B'&gt;,
+        gpiob_otyper: &amp;mut OTYPER&lt;'B'&gt;,
+        gpioc_moder: &amp;mut MODER&lt;'C'&gt;,
+        gpioc_otyper: &amp;mut OTYPER&lt;'C'&gt;,
+        clocks: Clocks,
+    ) -&gt; Self {
+        // Use .into_push_pull_output_in_state(…) to set an initial state on pins
+        todo!()
+    }
+
+    /// Make a brief high pulse of the SCK pin
+    fn pulse_sck(&amp;mut self) {
+        todo!()
+    }
+
+    /// Make a brief low pulse of the LAT pin
+    fn pulse_lat(&amp;mut self) {
+        todo!()
+    }
+
+    /// Set the given row output in the chosen state
+    fn row(&amp;mut self, row: usize, state: PinState) {
+        todo!()
+    }
+
+    /// Send a byte on SDA starting with the MSB and pulse SCK high after each bit
+    fn send_byte(&amp;mut self, pixel: u8) {
+        todo!()
+    }
+
+    /// Send a full row of bytes in BGR order and pulse LAT low. Gamma correction
+    /// must be applied to every pixel before sending them. The previous row must
+    /// be deactivated and the new one activated.
+    pub fn send_row(&amp;mut self, row: usize, pixels: &amp;[Color]) {
+        todo!()
+    }
+
+    /// Initialize bank0 by temporarily setting SB to low and sending 144 one bits,
+    /// pulsing SCK high after each bit and pulsing LAT low at the end. SB is then
+    /// restored to high.
+    fn init_bank0(&amp;mut self) {
+        todo!()
+    }
+
+    /// Display a full image, row by row, as fast as possible.
+    pub fn display_image(&amp;mut self, image: &amp;Image) {
+        // Do not forget that image.row(n) gives access to the content of row n,
+        // and that self.send_row() uses the same format.
+        todo!()
+    }
+}</code></pre>
+<p>❎ Implement all those functions.</p>
+<p>Note that since we do not have an operating system you can use <code>stm32l4xx_hal::delay::DelayCM</code> to implement the 100ms delay required in the initialization by doing a busy loop. It will use the <code>clocks</code> argument to compute from the system running frequency the number of loops it must perform to be as close as possible to the requested delay.</p>
+<h2 id="main-program-1"><a class="header" href="#main-program-1">Main program</a></h2>
+<p>❎ In your main program, build an image made of a gradient of blue and display it in loop on the matrix. Since it is necessary for the display to go fast, do not forget to run your program in <code>release</code> mode, as we have been doing for a while now.</p>
+<p>Are you seeing a nice gradient? If you do, congratulations, you have programmed your first peripheral in bare board mode with the help of a HAL. 👏</p>
+<p>(if not, add traces using <code>defmt</code> or revert to using <code>gdb</code>)</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="real-time-mode"><a class="header" href="#real-time-mode">Real-time mode</a></h1>
+<p>Now that we are able to display something on the LED matrix as fast as possible, we would like to do it in a more controlled way. More precisely, we want to:</p>
+<ul>
+<li><a href="labs/led-matrix/rtic.html">start using the RTIC real-time operating system for Cortex-M</a>;</li>
+<li><a href="labs/led-matrix/timer.html">display each line at a controlled pace</a> to get a uniform 60 frames per second display;</li>
+<li><a href="labs/led-matrix/image-change.html">change the image with a timer</a>;</li>
+<li><a href="labs/led-matrix/serial.html">receive a new image from the serial port</a>;</li>
+<li><a href="labs/led-matrix/triple-buffering.html">use triple buffering</a> to ensure smooth transitions.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="rtic"><a class="header" href="#rtic">RTIC</a></h1>
+<p>The RTIC (real-time interrupt-driven concurrency) real-time operating system will help us decouple tasks and resources.</p>
+<h2 id="add-rtic-as-a-dependency"><a class="header" href="#add-rtic-as-a-dependency">Add RTIC as a dependency</a></h2>
+<p>❎ Add the <code>cortex-m-rtic</code> dependency to your <code>Cargo.toml</code> file.</p>
+<p>⚠️ Be careful if you encounter guides targetting RTIC 0.5, as RTIC 1.0 and later use a different programming model.</p>
+<h2 id="rtic-program-structure"><a class="header" href="#rtic-program-structure">RTIC program structure</a></h2>
+<p>The main things to remember when developing a RTIC application are:</p>
+<ul>
+<li>An RTIC application is defined in a module.</li>
+<li>RTIC applications are based on short-lived tasks. Those tasks will be started by a hardware event (an interrupt) or by a software spawn command (in which case we can give extra arguments to the spawned task). The only exception to this rule is the long-running idle task which runs when nothing else is ready and must never terminate.</li>
+<li>Each task has a priority, starting from 0 for the idle task.</li>
+<li>Resources are initialized from an <code>init()</code> task. This task will run uninterrupted, and tasks scheduling will start automatically when the <code>init()</code> function terminates.</li>
+<li>RTIC separates resources into <em>shared resources</em>, which will be used by several tasks and require locking, and <em>local resources</em> that will be used only by one task but require initialization in <code>init()</code>.</li>
+<li>Tasks can also declare local resources (which will persist between calls of the task).</li>
+</ul>
+<p>In our case, we want to transform our existing program with minimal modifications into a simple RTIC application. We will keep all the hardware initialization part in the initialization task, and let the idle task display the image on the LED matrix in loop.</p>
+<p>⚠️ Since RTIC uses macros, errors are not always presented in a very clear way in the editor.</p>
+<h2 id="rtic-application-module"><a class="header" href="#rtic-application-module">RTIC application module</a></h2>
+<p>We will define our module <code>app</code> in <code>src/main.rs</code>. An RTIC application module must use the <code>rtic::app</code> attribute with a PAC (peripheral access crate) as its <code>device</code> argument.</p>
+<p>❎ Put your existing functions inside an <code>app</code> module in <code>src/main.rs</code> with the right <code>device</code> argument. In our case, we have imported <code>stm32l4xx_hal::pac</code>:</p>
+<pre><code class="language-rust no_run noplayground">#[rtic::app(device = pac)]
+mod app {
+    …
+}</code></pre>
+<p>❎ Since we want to use the same imports as our top-level program, add a <code>use super::*;</code> inside the <code>app</code> module. This way, we will be able to access <code>Color</code>, <code>Image</code>, and so on from our RTIC application.</p>
+<h2 id="resources"><a class="header" href="#resources">Resources</a></h2>
+<p>We must define the shared and local resources we will use. We can use any structure names we want and must respectively tag them with the <code>#[shared]</code> and <code>#[local]</code> attributes.</p>
+<p>❎ Inside the RTIC application module, define an empty shared resources structure type (we share nothing between tasks at this stage) named <code>Shared</code> and a local one containing the initialized LED matrix named <code>Local</code>:</p>
+<pre><code class="language-rust no_run noplayground">#[shared]
+struct Shared {}
+
+#[local]
+struct Local {
+    matrix: Matrix
+}</code></pre>
+<h2 id="initialization-task"><a class="header" href="#initialization-task">Initialization task</a></h2>
+<p>The initialization task must be tagged with the <code>#[init]</code> attribute and returns a three-element tuple containing the initialized shared resources, the initialized local resources and a monotonic timer of type <code>init::Monotonics</code>. We don't use a monotonic timer yet, using <code>init::Monotonics()</code> will create a dummy timer.</p>
+<p>As all tasks, the initialization task receives a <em>context</em> parameter specific to the task. In this case, it will contain a <code>core</code> field with the core peripherals and a <code>device</code> field with device peripherals. Those are the variables we named <code>_cp</code> and <code>dp</code> in the previous steps.</p>
+<p>❎ Define the initialization task (using your existing code) inside the RTIC application module:</p>
+<pre><code class="language-rust no_run noplayground">#[init]
+fn init(cx: init::Context) -&gt; (Shared, Local, init::Monotonics) {
+    defmt::info!(&quot;defmt correctly initialized&quot;);
+
+    let _cp = cx.core;
+    let dp = cx.device;
+
+    // Initialize the clocks, hardware and matrix using your existing code
+    todo!();
+
+    // Return the resources and the monotonic timer
+    (Shared {}, Local { matrix }, init::Monotonics())
+}</code></pre>
+<p>Note that you could have chosen another function name for the initialization task, for example <code>foo</code>. In this case, the context would have been named <code>foo::Context</code> and the monotonic timer <code>foo::Monotonics</code>, as in:</p>
+<pre><code class="language-rust no_run noplayground">#[init]
+fn foo(cx: foo::Context) -&gt; (Shared, Local, foo::Monotonics) {
+    …
+}</code></pre>
+<p>The same is true for the shared and local structures, or the name of the idle task. They are all identified by their specific attribute rather than by their name.</p>
+<h2 id="idle-task"><a class="header" href="#idle-task">Idle task</a></h2>
+<p>We will use the idle task to display an image on the matrix. The idle task is the one which uses the <code>matrix</code> resource put in the <code>Local</code> structure and must declare it in its <code>#[idle]</code> attribute. It will be made available through the <code>local.matrix</code> path applied on its context parameter. The idle task is the only one which never terminates, so its return type will be <code>!</code> (never).</p>
+<p>❎ Define the idle task and make it display an image on the LED matrix in an infinite loop.</p>
+<pre><code class="language-rust no_run noplayground">#[idle(local = [matrix])]
+fn idle(cx: idle::Context) -&gt; ! {
+    // Display an image on the LED matrix in an infinite loop
+    todo!();
+}</code></pre>
+<p>Note how the <code>idle::Context</code> type is different from the <code>init::Context</code> type we got in the initialization task. Every task gets its own context, which contains only data which should be accessible from the task.</p>
+<p>That's it! You should be able to run your application on your board.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="monotonic-timer"><a class="header" href="#monotonic-timer">Monotonic timer</a></h1>
+<p>In this part, we will start using a monotonic timer to run some tasks at designated times. For example, we want to display frames at a pace of 60 FPS (frames per second). Since each line of the matrix should get the same display time, we will call a display task 60×8=480 times per second. This display task will display the next line.</p>
+<p>RTIC does not come with an implementation of a monotonic timer. Most timers are only 32 bits wide and cannot count for a very long time, so they have to be combined together and making it right and efficient is not a trivial task and may depend on the application requirements.</p>
+<h2 id="dwtsystick-monotonic-timer"><a class="header" href="#dwtsystick-monotonic-timer">DWT+systick monotonic timer</a></h2>
+<p>The <code>dwt-systick-monotonic</code> crate provides a <code>DwtSystick</code> timer which uses the DWT (data watchpoing and trace unit) and the systick timer together to form a long-running monotonic timer. This crate is still in prerelease mode.</p>
+<p>❎ Add the <code>dwt-systick-monotonic</code> crate as a dependency to your <code>Cargo.toml</code>.</p>
+<p>We need to declare a type alias for this monotonic timer and tell RTIC that it will be bound to the <code>SysTick</code> hardware interrupt. We will use the <code>MyMonotonic</code> name for that, and we will be able to refer to the timer methods as <code>monotonics::MyMonotonic::method()</code>. Since we will be using only one monotonic timer, we will tell RTIC that it is the default one, and we will be able to refer to the timer methods as <code>monotonics::method()</code> (without including <code>MyMonotonic</code>).</p>
+<p>A monotonic timer can use a different frequency than the system one. However, the DWT+systick timer must use the same frequency as the system clock.</p>
+<p>❎ Import <code>dwt_systick_monotonic::DwtSystick</code> and declare the monotonic timer type as the default one, with a 80MHz granularity in your RTIC application module:</p>
+<pre><code class="language-rust no_run noplayground">#[monotonic(binds = SysTick, default = true)]
+type MyMonotonic = DwtSystick&lt;80_000_000&gt;;</code></pre>
+<p>❎ In your initialization task, create an instance of this timer and return it as the third element of the tuple:</p>
+<pre><code class="language-rust no_run noplayground">
+#[init]
+fn init(cx: init::Context) -&gt; (Shared, Local, init::Monotonics) {
+    …
+    let mut mono = DwtSystick::new(&amp;mut cp.DCB, cp.DWT, cp.SYST, 80_000_000);
+    …
+    (Shared {}, Local { matrix }, init::Monotonics(mono))
+}</code></pre>
+<h2 id="display-task"><a class="header" href="#display-task">Display task</a></h2>
+<p>We now have a monotonic timer running, but we do not use it for anything. We would like to use it to spawn a display task every time a new line should be displayed on the LED matrix in order to achieve a global 60 FPS refresh rate.</p>
+<h3 id="hardware-interrupt-support-for-the-software-task"><a class="header" href="#hardware-interrupt-support-for-the-software-task">Hardware interrupt support for the software task</a></h3>
+<p>This task will be spawned by software. However, RTIC uses hardware interrupts to schedule tasks, so we need to tell RTIC which interrupt is free to use. Since we do not plan to use the second serial interface (<code>USART2</code>), we will indicate so in the <code>#[rtic::app]</code> attribute using a <code>dispatchers</code> parameter. RTIC needs one free interrupt per priority level.</p>
+<p>❎ Add a <code>dispatchers = [USART2]</code> parameter to your <code>rtic::app</code> attribute.</p>
+<h3 id="declaration-of-the-task"><a class="header" href="#declaration-of-the-task">Declaration of the task</a></h3>
+<p>We want to add a display task with the default priority (1). This task will access the local resource <code>matrix</code> (and will be the only task to do so, so the resource is still local indeed) and will display one line at a time. This task will also define a persistent local resource which does not require initialization in the init task, <code>next_line</code>, with the next line to display.</p>
+<p>❎ Empty the idle task so that it just does an infinite <code>loop {}</code>. It does not need to access the <code>matrix</code> resource anymore.</p>
+<p><em>Note: we could completely remove the idle task, and let RTIC use the default version. However, the default version puts the microcontroller on sleep where there is nothing to do using the <code>WFI</code> (wait for interrupt) assembly instruction. This would be fine in production, but RTT that we use to send debug messages does not work well with WFI, so an infinite loop is better in development even if it means the microcontroller is never going to save power by sleeping.</em></p>
+<p>❎ Add an <code>image</code> (of type <code>Image</code>) to the <code>Local</code> structure and build the image you want to display in <code>init()</code>.</p>
+<p>❎ Inside the RTIC application module, create the display task, and declare that it uses the <code>matrix</code> and <code>image</code> local resources, as well as a private local one <code>next_line</code> of type <code>usize</code> and initialized at 0:</p>
+<pre><code class="language-rust no_run noplayground">#[task(local = [matrix, image, next_line: usize = 0])]
+fn display(cx: display::Context) {
+    // Display line next_line (cx.local.next_line) of
+    // the image (cx.local.image) on the matrix (cx.local.matrix).
+    // All those are mutable references.
+    todo!()
+    // Increment next_line up to 7 and wraparound to 0
+    todo!()
+}</code></pre>
+<h3 id="display-task-spawning"><a class="header" href="#display-task-spawning">Display task spawning</a></h3>
+<p>The display task never runs. We will first run it as fast as possible, by spawning it from the initialization task and spawning it again from the display task itself. A task is spawn by using <code>::spawn()</code> with arguments (if any) on its name. In our case, <code>display::spawn()</code> will start our task and returns a result if the task has been queued successfully (by default, a task can be queued one time only at any moment).</p>
+<p>❎ Add <code>display::spawn().unwrap();</code> near the end of the initialization task so that the display task gets spawned after <code>init()</code> terminates.</p>
+<p>❎ Add <code>display::spawn().unwrap();</code> in the display task so that it gets respawned as soon as the display task terminates since no task with a higher priority will be waiting.</p>
+<p>Note that in practice the idle task will never run since the display task will always be executing or ready to execute, and its priority (1 by default) is greater than the idle task priority (0). You should not see &quot;In idle task&quot; in your RTT console.</p>
+<h2 id="using-accurate-timing"><a class="header" href="#using-accurate-timing">Using accurate timing</a></h2>
+<p>We want to display lines at a fixed rate (480 FPS, to get a 60 FPS image) rather than as fast as possible. To do so, we will give an argument to <code>display</code> corresponding to the reference time, <em>i.e.,</em> the theoretical date at which the task should have been launched. It will be used to compute the next date, and defer the spawn to this date as well as give the date as parameter to the function.</p>
+<p><code>DwtSystick</code> instances implement <code>rtic::Monotonic</code> which defines a <code>Instant</code> associated type which defines a date.</p>
+<p>❎ Right after your <code>MyMonotonic</code> type alias, define <code>Instant</code> as a new type alias to your monotonic timer type <code>Instant</code>:</p>
+<pre><code class="language-rust no_run noplayground">type Instant = &lt;MyMonotonic as rtic::Monotonic&gt;::Instant;</code></pre>
+<p>❎ In order to ease time computations on <code>Instant</code>, import <code>dwt_systick_monotonic::ExtU32</code>. This defines several functions on the <code>u32</code> integer types returning durations (instant differences) such as <code>5.secs()</code> (for 5 seconds).</p>
+<p>❎ Make the display task take a <code>at</code> argument of type <code>Instant</code> which represents the exact date at which it should have been launched.</p>
+<p>❎ Add the argument <code>mono.now()</code> in <code>init</code> <code>display::spawn()</code> occurrence to indicate that the first line theoretical display date is right now. The timer starts after <code>init()</code> terminates, so this corresponds to the correct date.</p>
+<p>❎ In the display task itself, compute the <code>next</code> instant at which the next line should be displayed, from <code>at</code> and the desired period. You can compute the period by dividing <code>1.secs()</code> by 8 and by 60. Change <code>display::spawn()</code> by <code>display::spawn_at()</code> and pass the computed date both as the requested date and as the display task call argument.</p>
+<p>❎ In the idle task, display something in the loop every ten thousands turns of the idle loop. You can use a local resource to count. Note that ten thousands can be written as <code>10_000</code> rather than <code>10000</code>, which is more easily readable.</p>
+<p>You can now run your program. If everything goes well, the LED matrix should still display a smooth image, and in addition you should see many messages in the RTT console since display task spawns are now spaced by some time, so the idle task gets a chance to execute.</p>
+<p>❎ Remove the RTT message from the idle task, letting only the infinite loop.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="image-change"><a class="header" href="#image-change">Image change</a></h1>
+<p>We would like to change the image every second, while still displaying it at 60 FPS. The steps do to that will be:</p>
+<ul>
+<li>make the image to display a shared resource, that will be used both by the display task and a new rotate image task;</li>
+<li>create a rotate image task, running with a priority lower than the display task, which will change the image shared resource every second.</li>
+</ul>
+<h2 id="shared-resource"><a class="header" href="#shared-resource">Shared resource</a></h2>
+<p>❎ Add an <code>image</code> field of type <code>Image</code> to the <code>Shared</code> structure. Initialize it with a default image value (all black) in <code>init()</code>.</p>
+<p>❎ Remove the <code>image</code> field from the <code>Local</code> structure.</p>
+<p>❎ This resource will be used from the display task. Declare it in its <code>#[task]</code> attribute, and also make the display task have a priority of 2:</p>
+<pre><code class="language-rust no_run noplayground">#[task(local = [matrix, next_row: usize = 0], shared = [image], priority = 2)]
+fn display(cx: display::Context, at: Instant) {
+    …
+}</code></pre>
+<p>❎ Modify the display task to use the <code>image</code> shared resource. This resource can be accessed through <code>cx.shared.image</code> and requires locking when you want to use it:</p>
+<pre><code class="language-rust no_run noplayground">#[task(…, shared = [image], …)]
+fn display(mut cx: display::Context, …) {
+    …
+    cx.shared.image.lock(|image| {
+        // Here you can use image, which is a &amp;mut Image,
+        // to display the appropriate row
+        …
+    });
+}</code></pre>
+<p>Note that since you need to make <code>cx</code> mutable to use <code>cx.shared.image.lock</code>. Also note that since <code>display</code> will be the task accessing the image with the highest priority, the locking will generate no code and will occur no performance penalty.</p>
+<h2 id="the-rotate-image-task"><a class="header" href="#the-rotate-image-task">The rotate image task</a></h2>
+<p>First of all, we want the rotate image task to run at the default priority (1). It means that we now have two priority levels at which we want to spawn software tasks, we need another free hardware interrupt to do so.</p>
+<p>❎ Add <code>USART3</code> that we do not use to the list of dispatchers for our RTIC application.</p>
+<p>We will create a new <code>rotate_image</code> task which modifies the <code>image</code> shared resource every second. We want to display red, green and blue gradients, so we will use a variable to remember which one was displayed last. Rather than using a local resource to do so, we will make the <code>rotate_image</code> task take a parameter with the next primary color to display (red is 0, green is 1, blue is 2).</p>
+<p>❎ Create a <code>rotate_image</code> task which accesses the <code>image</code> shared resource and takes a <code>color_index: usize</code> argument representing the next primary color to display. This task must replace the content of the <code>image</code> shared resource after locking it with the new image, and must spawn itself one second later with the primary color to display next. You can use <code>rotate_image::spawn_after()</code> to spawn the task with a relative delay, as we do not care about a slight time drift here.</p>
+<p>❎ Add an immediate spawn of <code>rotate_image</code> in <code>init()</code> with an initial primary color to display of 0.</p>
+<p>Congratulations, your display is now smoothly displaying different gradient images. If this is not the case, do not hesitate to use RTT to send debugging information.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="serial-port"><a class="header" href="#serial-port">Serial port</a></h1>
+<p>As was done in <a href="https://sen.enst.fr/se203/td-mise-en-oeuvre-d-une-application-embarquee/uart-irq-led">the SE203 lab</a>, we want to be able to send image data from the serial port. We will configure the serial port, then write a decoding task to handle received bytes.</p>
+<h2 id="configuration-of-the-serial-port"><a class="header" href="#configuration-of-the-serial-port">Configuration of the serial port</a></h2>
+<p>We will use the HAL (harware abstraction layer) to configure the serial port and enable some interrupts.</p>
+<p>❎ Import the necessary types from the HAL:</p>
+<pre><code class="language-rust no_run noplayground">use stm32l4xx_hal::serial::{Config, Event, Rx, Serial};</code></pre>
+<p>In the initialization task, we will put the pins PB6 (tx) and PB7 (rx) in alternate mode, and use them to initialize a <code>Serial</code> structure at the right baud rate. We will then configure the serial port to receive the &quot;RX not empty&quot; event and split the serial port into a sender and receiver part since we are only interested in the receiver part. We will store this receiver part in the local resources structure, since only the task handling the <code>USART1</code> interrupt will need to access it.</p>
+<p>❎ Configure PB6 and PB7 into the right mode.</p>
+<p>❎ Instantiate a <code>stm32l4xx_hal::serial::Config</code> structure using the default value then set the baudrate to 38400 bits per second.</p>
+<p>❎ Initialize the serial port using the configured ports and the <code>Config</code> structure and put it into the <code>serial</code> variable. You can note that <code>USART1</code> implements the <code>RccBus</code> with the <code>APB2</code> bus constant, which means that the latest argument is <code>&amp;mut rcc.apb2</code>.</p>
+<p>❎ Call <code>serial.listen(Event::Rxne)</code> to enable the &quot;RX not empty&quot; event which will trigger an interrupt when a character is received.</p>
+<p>❎ Using <code>serial.split()</code>, get the receiver part of the serial port.</p>
+<p>❎ Modify the <code>Local</code> structure to include the receiver part of the serial port with name <code>usart1_rx</code> and type <code>Rx&lt;USART1&gt;</code>, and add the appropriate value in <code>init()</code>.</p>
+<p>Your program should be able to run, even though it does nothing when a character arrives on the serial port.</p>
+<h2 id="serial-port-reception"><a class="header" href="#serial-port-reception">Serial port reception</a></h2>
+<p>We want to replace the part changing the image periodically by one that received an image on the serial port.</p>
+<p>❎ Remove the <code>rotate_image</code> task and all reference to it.</p>
+<p>❎ Create a new <code>receive_byte</code> task which binds on hardware interrupt <code>USART1</code>, uses the local resource <code>usart1_rx</code> to read the received character, uses a new local resource <code>next_image</code> initialized to <code>Image::default()</code> in <code>init()</code>, uses the shared resource <code>image</code> in order to change the current image, and uses a persistent local resource <code>next_pos: usize = 0</code> to represent respectively the next image in which the bytes are stored and the next index at which to write the next byte:</p>
+<pre><code class="language-rust no_run noplayground">#[task(binds = USART1,
+       local = [usart1_rx, next_image, next_pos: usize = 0],
+       shared = [image])]
+fn receive_byte(cx: receive_byte::Context)
+{
+    let next_image: &amp;mut Image = cx.local.next_image;
+    let next_pos: &amp;mut usize = cx.local.next_pos;
+    if let Ok(b) = cx.local.usart1_rx.read() {
+        // Handle the incoming byte according to the SE203 protocol
+        // and update next_image
+        // Do not forget that next_image.as_mut() might be handy here!
+        todo!();
+        // If the received image is complete, make it available to
+        // the display task.
+        if *next_pos == 8 * 8 * 3 {
+            cx.shared.image.lock(|image| {
+                // Replace the image content by the new one, for example
+                // by swapping them, and reset next_pos
+                todo!();
+            });
+        }
+    }
+}</code></pre>
+<p>Note that RTIC will automatically enable the <code>USART1</code> interrupt as soon as <code>init()</code> terminates and set your task as the hardware interrupt handler.</p>
+<p>Using the <code>stty.sh</code> script and the <code>one_frame.bin</code>/<code>many_frames.bin</code> files on the <a href="https://sen.enst.fr/se203/td-mise-en-oeuvre-d-une-application-embarquee/uart-irq-led">SE203 page</a> you should be able to send images to your serial port. In case of problems, do not forget that you can use RTT to send messages and gdb to set breakpoints into your application.</p>
+<p>The protocol decoding is not perfect, as you will see if you send the <code>final.bin</code> file to your device.</p>
+<p>❎ Make it resilient by implementing a better parser (ensuring that an image always starts with the 0xff marker byte, discarding extra data without overflowing your buffer, etc.)</p>
+<p>Congratulations, your project rocks!</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="triple-buffering"><a class="header" href="#triple-buffering">Triple buffering</a></h1>
+<p>Our current handling of the image received on the serial port is not very satisfying. As soon as we have received a full image, we update the shared image: it means that the next rows to be displayed will come from the newer image while some rows on the LED matrix may have come from the older image.</p>
+<p><strong>⚠ You do not have to implement double-buffering. You have to understand how it works, but you only need to implement triple-buffering.</strong></p>
+<h2 id="what-is-double-buffering"><a class="header" href="#what-is-double-buffering">What is double-buffering?</a></h2>
+<p>In older computers, drawing something was performed directly in the screen buffer (also called the video RAM) as memory was tight. It meant that some artifacts could easily be perceived unless extreme caution was observed. For example, if an image was displayed by a beam going from the top to the bottom of the screen, drawing a shape starting from the bottom of the screen would make the bottom half of the shape appear before the top half does. On the other hand, drawing from the bottom to the top at the same pace as the refreshing beam would display consistent pictures.</p>
+<p>As memory became more affordable, people started to draw the next image to display into a back buffer. This process lets software draw things in an order which is not correlated with the beam displaying the image (for example objects far away then nearer objects). Once the new image is complete, it can be transferred into the front buffer (the video RAM) while ensuring that the transfer does not cross the beam, which requires synchronization with the hardware. This way, only full images are displayed in a consistent way.</p>
+<p>On some hardware, both buffers fit in video RAM. In this case, switching buffer at the appropriate time is done by modifying a hardware register at the appropriate time.</p>
+<h2 id="double-buffering-in-our-project"><a class="header" href="#double-buffering-in-our-project">Double-buffering in our project</a></h2>
+<p>We already implement part of the double-buffering method in our code: we prepare the next image in a separate buffer while the current one is being displayed in a loop. We could modify our code (<strong>⚠ again, you do not need to implement double-buffering, this is only an example, you'll implement triple-buffering</strong>) so that the image switching takes place at the appropriate time:</p>
+<ul>
+<li>Make the new image a shared resource <code>next_image</code> rather than a local resource.</li>
+<li>Add a shared boolean <code>switch_requested</code> to the <code>Shared</code> state, and set it in <code>receive_byte</code> when the new image is complete.</li>
+<li>Have the <code>display</code> task check the <code>switch_requested</code> boolean after displaying the last row of the current image, and swap the <code>image</code> and <code>next_image</code> if this is the case and reset <code>switch_requested</code>.</li>
+</ul>
+<p>By locking <code>next_image</code> and <code>switch_requested</code> for the shortest possible time, the <code>receive_byte</code> task would prevent the <code>display</code> task from running for very short periods. However, we could still run into an issue in the following scenario:</p>
+<ul>
+<li>The last byte of the next image is received just as the current image starts displaying.</li>
+<li>We set <code>switch_requested</code> to request the image switch, but this will happen after the whole current image as been displayed (roughly 1/60 seconds later, or 17ms).</li>
+<li>The speed of the serial port is 38400 bits per second, and a byte requires 10 symbols (start, 8 bits, stop).</li>
+<li>It means that while the current image is being displayed, about 64 bytes of the next-next image can be received.</li>
+</ul>
+<p>Where can we store those bytes? If we store them in <code>next_image</code>, we will alter a buffer which has been fully drawn but not displayed yet so we cannot do this. We cannot obviously store them in <code>image</code> either. There is nothing we can do there.</p>
+<h2 id="triple-buffering-1"><a class="header" href="#triple-buffering-1">Triple buffering</a></h2>
+<p>We need a third buffer: one buffer is the one currently being displayed, one buffer is the next fully completed image ready to be displayed, and one buffer is the work area where we build the currently incomplete image.</p>
+<p>In order to avoid copying whole images around, we would like to work with buffer references and switch those references. Should we use dynamic memory allocation? ☠ Certainly not.</p>
+<h3 id="the-heapless-crate"><a class="header" href="#the-heapless-crate">The <code>heapless</code> crate</a></h3>
+<p>The <a href="https://docs.rs/heapless"><code>heapless</code> crate</a> contains several data structures that can be used in environments where dynamic memory allocation is not available or not desirable:</p>
+<ul>
+<li><code>heapless::Vec&lt;T&gt;</code> has an interface quite similar to <code>std::vec::Vec&lt;T&gt;</code> except that those vectors have a fixed capacity, which means that the <code>push</code> operation returns a <code>Result</code> indicating if the operation succeeded or failed (in which case it returns the element we tried to push).</li>
+<li>Other structures such as <code>BinaryHeap</code>, <code>IndexMap</code>, <code>IndexSet</code>, <code>String</code>, etc. act closely like the standard library ones.</li>
+<li><code>Pool</code> is a lock-free memory pool which gives away and can reclaim fixed size objects: this is the one we are interested in.</li>
+</ul>
+<h3 id="using-a-pool"><a class="header" href="#using-a-pool">Using a pool</a></h3>
+<p>By using a pool, we will be able to manipulate values of type <code>Box&lt;Image&gt;</code>: this type represents a pointer to an image. By manipulating <code>Box&lt;Image&gt;</code> instead of <code>Image</code>, we will be able to exchange pointers rather than exchanging whole image contents.</p>
+<p>We will use three types from the <code>heapless::pool</code> module:</p>
+<ul>
+<li><code>Box&lt;T&gt;</code> is similar to the standard library <code>std::box::Box&lt;T&gt;</code>, and owns an object of type <code>T</code>.</li>
+<li><code>Node&lt;T&gt;</code> represents the in-memory data structure holding the memory area for one object of type <code>T</code> and administrative information about the next node.</li>
+<li><code>Pool&lt;T&gt;</code> represents a pool that can hold boxed references to objects of type <code>T</code>.</li>
+</ul>
+<p>A pool is created using <code>Pool::new()</code> and contains no object. The method <code>grow_exact()</code> takes a static slice of uninitialized nodes. The curious student will read the documentation of <a href="https://doc.rust-lang.org/stable/std/mem/union.MaybeUninit.html"><code>MaybeUninit</code></a>, but for everyone here is how one can initialize a pool containing three <code>Image</code> objects:</p>
+<pre><code class="language-rust no_run noplayground">  let pool: Pool&lt;Image&gt; = Pool::new();
+  unsafe {
+    static mut MEMORY: MaybeUninit&lt;[Node&lt;Image&gt;; 3]&gt; = MaybeUninit::uninit();
+    pool.grow_exact(&amp;mut MEMORY);   // static mut access is unsafe
+  }</code></pre>
+<ul>
+<li>This pool can hand out <code>Box&lt;Image, Uninit&gt;</code> through <code>pool.alloc()</code> which returns an <code>Option&lt;Box&lt;Image, Uninit&gt;&gt;</code>.</li>
+<li>A <code>Box&lt;Image, Uninit&gt;</code> can be transformed into a <code>Box&lt;Image&gt;</code> (which is a shortcut for <code>Box&lt;Image, Init&gt;</code>) by calling its <code>init</code> method with the initial value.</li>
+<li>When it is no longer used, a <code>Box&lt;Image&gt;</code> or <code>Box&lt;Image, Uninit&gt;</code> is returned to the pool by using <code>pool.free(image)</code>.</li>
+</ul>
+<p>Isn't that simple enough? By the way, note that <code>pool.alloc()</code> and <code>pool.free()</code> only require a non-mutable reference to the pool.</p>
+<h3 id="useful-functions"><a class="header" href="#useful-functions">Useful functions</a></h3>
+<p>Before modifying your code, make sure you know of those useful methods when working with mutable references. The problem here is that
+when you get lent a mutable reference onto an object, you cannot easily become the owner of the referenced object as the reference would not designate a valid object anymore. However, you can:</p>
+<ul>
+<li>Use <code>core::mem::swap()</code> to exchange the object with another object you own of the same type. This way, the reference stays valid as it points onto another object now.</li>
+<li>Use <code>Option::take()</code> when you want to take the content of an <code>Option&lt;T&gt;</code> that you do not own, this will replace it by <code>None</code> which is a valid object.</li>
+</ul>
+<h4 id="corememswap"><a class="header" href="#corememswap"><code>core::mem::swap()</code></a></h4>
+<p>When <code>a</code> et <code>b</code> are mutable references of the same type <code>&amp;mut T</code>, <code>core::mem::swap(a, b)</code> will exchange the content of <code>a</code> and <code>b</code>. This is a great way to exchange something contained in a mutable reference with something we own locally:</p>
+<pre><pre class="playground"><code class="language-rust">type LargeArray = [u8; 1000];
+
+fn exchange(a: &amp;mut Box&lt;LargeArray&gt;) {
+  // How can we become owner of the `Box&lt;LargeArray&gt;` referenced by `a`?
+  // We can exchange it with another object of the same type.
+  // Let's create one.
+  let mut b: Box&lt;LargeArray&gt; = Box::new([42; 1000]);
+
+  // Let's exchange the object we own in `b` by the one referenced by `a`
+  // (both objects are of type `Box&lt;Image&gt;`).
+  core::mem::swap(a, &amp;mut b);
+
+  // We now own in `b` the Box&lt;LargeArray&gt; that was in `a`,
+  // and `a` now contains the Box&lt;LargeArray&gt; that was in `b`.
+  // We exchanged the boxes (pointers), the `LargeArray` arrays
+  // themselves were not moved around.
+
+  // At the end of this function, `b` will be dropped, so the `LargeArray`
+  // which was initially passed in `a` will be deallocated (because the
+  // destructor of `Box` deallocates its content).
+}
+
+fn main() {
+  let mut a: Box&lt;LargeArray&gt; = Box::new([10; 1000]);
+  println!(&quot;a[0] = {}&quot;, a[0]);   // Will print 10
+  exchange(&amp;mut a);
+  println!(&quot;a[0] = {}&quot;, a[0]);   // Will print 42
+}</code></pre></pre>
+<p>Note that there is nothing unsafe in doing that.</p>
+<h4 id="optiontake"><a class="header" href="#optiontake"><code>Option::take()</code></a></h4>
+<p>When <code>opt</code> is a mutable reference of type <code>&amp;mut Option&lt;T&gt;</code>, <code>opt.take()</code> returns the content of <code>opt</code> and replaces it by <code>None</code>:</p>
+<pre><pre class="playground"><code class="language-rust">fn display_option(opt: &amp;mut Option&lt;&amp;str&gt;) {
+  if let Some(s) = opt.take() {   // Take the String if any and put None into opt
+    println!(&quot;I have taken ownership of the string, which was: {s}&quot;);
+  } else {
+    println!(&quot;There was nothing in the opt&quot;);
+  }
+}
+
+fn main() {
+  let mut opt = Some(&quot;Hello, world&quot;);
+  display_option(&amp;mut opt);    // Will display the string and put None into opt
+  display_option(&amp;mut opt);    // Will indicate that there is nothing in the opt
+}</code></pre></pre>
+<p>Of course we could have used <code>core::mem::swap()</code> as well, but <code>Option::take()</code> is more idiomatic. Here is a version with <code>swap()</code> anyway:</p>
+<pre><pre class="playground"><code class="language-rust">fn display_option(opt: &amp;mut Option&lt;&amp;str&gt;) {
+  let mut empty = None;
+  core::mem::swap(&amp;mut empty, opt);
+  
+  // What was referenced by `opt` is now in `empty`
+  // and what was in `empty` is now referenced by `opt`.
+  // Let's check it with an `assert!()`.
+  assert!(opt.is_none());
+
+  if let Some(s) = empty {   // `empty` now contains what was in `opt`
+    println!(&quot;I have taken ownership of the string, which was: {s}&quot;);
+  } else {
+    println!(&quot;There was nothing in the opt&quot;);
+  }
+}
+
+fn main() {
+  let mut opt = Some(&quot;Hello, world&quot;);
+  display_option(&amp;mut opt);    // Will display the string and put None into opt
+  display_option(&amp;mut opt);    // Will indicate that there is nothing in the opt
+}</code></pre></pre>
+<p>There also exists <code>Option::replace()</code> which takes the content of an <code>Option&lt;T&gt;</code>
+we have a reference onto and replaces it with <code>Some</code> value.</p>
+<h3 id="using-the-triple-buffering-in-our-code"><a class="header" href="#using-the-triple-buffering-in-our-code">Using the triple buffering in our code</a></h3>
+<p>Our shared state will be modified to include those fields:</p>
+<ul>
+<li><code>next_image: Option&lt;Box&lt;Image&gt;&gt;</code>: the next image to display if one is ready;</li>
+<li><code>pool: Pool&lt;Image&gt;</code>: the pool from which to draw or return <code>Box&lt;Image&gt;</code> buffers.</li>
+</ul>
+<p>Our local state will include those fields (used in their respective task):</p>
+<ul>
+<li><code>current_image: Box&lt;Image&gt;</code>: the image currently being displayed by the <code>display</code> task;</li>
+<li><code>rx_image: Box&lt;Image&gt;</code>: the image currently being filled by the <code>receive_byte</code> task.</li>
+</ul>
+<p>❎ Modify the <code>Shared</code> and <code>Local</code> structs to include the fields described above and initialize them from the <code>#[init]</code> task. The initial <code>current_image</code> and <code>rx_image</code> must be drawn from the pool and initialized with <code>Image::default()</code>. <code>next_image</code> will be initialized to <code>None</code> since there is no next image ready to display.</p>
+<p>❎ Modify the <code>display</code> task so that it sends a row from the <code>current_image</code> local resource of type <code>Box&lt;Image&gt;</code>. When the last row is displayed, if <code>next_image</code> contains an image, <code>take()</code> it in a variable <code>image</code> and <code>swap()</code> it with <code>current_image</code>. Return the old image (which is now in <code>image</code> after the swap) to the pool.</p>
+<p>❎ In the <code>receive_byte</code> task, fill the <code>rx_image</code> local resource of type <code>Box&lt;Image&gt;</code>.</p>
+<p>❎ In the <code>receive_byte</code> task, once the <code>rx_image</code> is complete, you must do the following:</p>
+<ol>
+<li>If <code>next_image</code> contains an image, <code>take()</code> it and return it to the pool. Note that it represents an image which was ready to be displayed but did not get a chance to be displayed yet. This could happen in the future if we prepared images from different tasks in a rapid succession.</li>
+<li>Obtain a <code>future_image</code> from the pool, and install it (by <code>swap()</code>-ping them) as the future <code>rx_image</code>.</li>
+<li>Store the completed image (which is now in <code>future_image</code> after the swap) in <code>next_image</code> so that it will be displayed soon.</li>
+</ol>
+<p>Well done, you are now using triple buffering for a very smooth display! Ensure everything looks nice and be proud of yourself.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="screen-saver"><a class="header" href="#screen-saver">Screen saver</a></h1>
+<p>What should your led matrix do when you do not send anything on the
+serial port? Wouldn't it be great to have a screensaver, which
+automatically runs when nothing is sent, and does not get in the way otherwise?</p>
+<h2 id="recording-image-changes"><a class="header" href="#recording-image-changes">Recording image changes</a></h2>
+<p>You want to record image changes events in a <code>changes</code> counter. This counter will be
+incremented every time there is a new image to display. This counter will be checked
+by our screen saver: if it does not get incremented, the screensaver can assume that
+no image is incoming.</p>
+<p>However, you do not want your serial task to increment this counter:
+since <code>changes</code> is a shared resource, it would mean that the
+screensaver can block the serial port task when it locks the variable. A cleaner
+solution would be to have a software task that can increment the counter: only this task
+can be blocked by the screensaver.</p>
+<p>❎ Add a <code>changes</code> shared resource of type <code>u32</code>.</p>
+<p>❎ Create a <code>notice_change()</code> software task, with a low priority, whose job is to increment the <code>changes</code> counter in wrapping mode.</p>
+<p>❎ Spawn <code>notice_change()</code> from the serial reception task when it creates a new <code>next_image</code>.</p>
+<h2 id="creating-the-screen-saver"><a class="header" href="#creating-the-screen-saver">Creating the screen saver</a></h2>
+<p>The screen saver will be a task executing roughly every second (there
+is no need for precision), and cycling between red, green, and blue
+gradients. This task will keep a <code>last_changes</code> local resource, which
+contains the latest value seen in <code>changes</code>. If those values are
+equal, it means that either:</p>
+<ul>
+<li>no new image has been received in the meantime;</li>
+<li>or \(k\times 2^{32}\) images have been received with \(k&gt;0\):
+this cannot happen in one second.</li>
+</ul>
+<p>So when <code>changes</code> is equal to <code>last_changes</code>, the screensaver knows
+that no image has been received from the serial port during the last
+second: it is safe to display a gradient.</p>
+<p>❎ Add a <code>screensaver()</code> software task, which will also keep a color
+index local resource to know what color (red, green, or blue) it should
+display next. It could work as follows:</p>
+<ul>
+<li>
+<p>If no new image has been received, build a gradient in an empty
+image retrieved from the image pool and set it in <code>next_image</code>. Do not
+forget to return the previous <code>next_image</code> to the pool if it was set, and
+to increment the color index for the next image you'll display.</p>
+</li>
+<li>
+<p>If an image has been received, record the current <code>changes</code> into <code>last_changes</code>.</p>
+</li>
+<li>
+<p>Spawn the <code>screensaver()</code> task one second later.</p>
+</li>
+</ul>
+<p>❎ Spawn the <code>screensaver()</code> task from the <code>init()</code> function.</p>
+<p>Your screensaver should now display a new gradient every second, except when it
+received data from the serial port, in which case the screensaver will not sent any
+gradient image to be displayed. It will resume its operation after the serial port
+transmission has been stopped for more than one second.</p>
+<p>Do not forget to commit and push your code.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="drawing-things"><a class="header" href="#drawing-things">Drawing things</a></h1>
+<p>The screensaver feature was nice, but the screensaver could be more
+entertaining. What if it could display scrolling text, such as &quot;This
+Rust SE202 project will get me a good grade&quot;?</p>
+<p>Fortunately, one crate can help you do that: <a href="https://crates.io/crates/embedded_graphics/">embedded-graphics</a>. Provided
+you do the proper interfacing with your hardware, this crate will let
+you draw all kind of shapes, and even display text.</p>
+<h2 id="interfacing-with-your-hardware-the-embedded-module"><a class="header" href="#interfacing-with-your-hardware-the-embedded-module">Interfacing with your hardware: the <code>embedded</code> module</a></h2>
+<p>You have already decoupled the logical representation of your LED
+matrix (the <code>Image</code> type) from the physical one (the <code>Matrix</code>
+type). This will be your job easier, as you will only have to
+interface the <code>Image</code> type with the <code>embedded-graphics</code> crate: once
+you have an <code>Image</code> you can display it on your hardware by putting it
+into <code>next_image</code>.</p>
+<p>❎ Create an <code>embedded</code> module in your library. This module will
+contain anything needed to interface the drawing primitives of the
+<code>embedded-graphics</code> crate with your <code>Image</code> type.</p>
+<p>First you'll have to choose a pixel representation that
+<code>embedded-graphics</code> can use and which is appropriate for your
+display. Since you can already display RGB colors with 8 bits data for
+each component, the
+<a href="https://docs.rs/embedded-graphics/latest/embedded_graphics/pixelcolor/struct.Rgb888.html"><code>Rgb888</code></a>
+color type seems appropriate.</p>
+<p>❎ Implement <code>From&lt;Rgb888&gt;</code> for your <code>Color</code> type. That will be useful
+when drawing on your <code>Image</code>, to build a proper <code>Color</code> value.</p>
+<p>Now, you need to implement the
+<a href="https://docs.rs/embedded-graphics/latest/embedded_graphics/draw_target/trait.DrawTarget.html"><code>DrawTarget</code></a>
+trait for your <code>Image</code> type. This trait is the one which does the real
+drawing. You will only implement the minimal functionality and use the
+provided defaults for the rest.</p>
+<p>❎ Implement <code>DrawTarget</code> for <code>Image</code>:</p>
+<ul>
+<li>The <code>Color</code> type will be <code>Rgb888</code>.</li>
+<li>You can use
+<a href="https://doc.rust-lang.org/std/convert/enum.Infallible.html"><code>Infallible</code></a>
+as your <code>Error</code> type, because drawing into an <code>Image</code> never fails.</li>
+<li>When you implement <code>draw_iter()</code>, make sure that you only set the
+pixels whose coordinates belong to the image (<code>x</code> and <code>y</code> both in
+<code>0..8</code>). This method can be called with a larger image, for example
+a large text, and you will only display a portion of it.</li>
+<li>If you need to convert a <code>Rgb888</code> into a <code>Color</code>, do not forget that
+you can use <code>.into()</code> because you implemented <code>From&lt;Rgb888&gt; for Color</code>.</li>
+</ul>
+<h2 id="upgrading-the-screensaver"><a class="header" href="#upgrading-the-screensaver">Upgrading the screensaver</a></h2>
+<p>You can now use the drawing primitives of <code>embedded-graphics</code> to
+create images in your screensaver instead of using gradients.</p>
+<p>❎ Modify your screensaver so that it creates intesting images using
+the drawing primitives. Do not forget to clear the image before
+drawing in it (you may create a new <code>clear()</code> method on <code>Image</code> if you
+wish, filling it with black).</p>
+<p>For example, you could add another local variable in addition to the
+color index, such as a shape index, and draw a square, a triangle, a
+circle, and a solid color. Ideally, those color and shape indices
+would use cycle sizes which are coprime, to maximize the displayed
+combinations.</p>
+<p>When this works, commit and push your code.</p>
+<h2 id="drawing-text"><a class="header" href="#drawing-text">Drawing text</a></h2>
+<p>The next step is to display scrolling text from the screensaver. Yes,
+that means forgetting about the shapes that you just designed, they
+were used to familiarize yourself with the library.</p>
+<p>A
+<a href="https://docs.rs/embedded-graphics/latest/embedded_graphics/text/struct.Text.html"><code>Text</code></a>
+object represents some text that can later been drawn into anything
+implementing <code>DrawTarget</code> (such as an <code>Image</code>). It uses a character
+style, which can be built using
+<a href="https://docs.rs/embedded-graphics/latest/embedded_graphics/mono_font/struct.MonoTextStyle.html#method.new"><code>MonoTextStyle::new()</code></a>
+from a font and a color. And the
+<a href="https://crates.rs/crates/ibm437"><code>ibm437</code></a> crate provides a great
+<a href="https://docs.rs/ibm437/latest/ibm437/constant.IBM437_8X8_REGULAR.html"><code>IBM437_8X8_REGULAR</code></a>
+font which will be perfect for your LED matrix.</p>
+<p>The idea is to call your screensaver every 60ms (instead of every
+second) and to make some text scroll to the next position if no new
+image has been received. To make the text scroll to the left, you will
+position it as a negative <code>x</code> offset: since you display pixels whose
+<code>x</code> is in <code>0..8</code>, decreasing the <code>x</code> position of the start of the text
+will make it go left.</p>
+<p>❎ Modify the <code>screensaver()</code> task so that it gets called every
+60ms. You need a precise timing if you want the scrolling to be
+pleasant.</p>
+<p>❎ Modify the <code>screensaver()</code> task such that, when it wants to display something:</p>
+<ul>
+<li>A <code>Text</code> object is built with a text such as &quot;Hello SE202&quot;, and
+placed at an <code>x</code> position whose value is kept in a <code>offset</code> local
+variable. You can use the color you want, or make the color cycle.</li>
+<li>The text is drawn into an image coming from the pool, and exchanged
+with <code>next_image</code> (don't forget to return the previous one to the
+pool if set).</li>
+<li>Decrease the <code>offset</code> local variable, except if the end of the text
+has reached the <code>0</code> <code>x</code> coordinate, in which case <code>offset</code> must be
+reset to display the text again (find the appropriate value so that
+it is nice for the eyes). Note: the <code>Text</code> object has methods to
+check its bounding box (the smallest rectangle in which it fits).</li>
+</ul>
+<p>❎ Modify the <code>screensaver()</code> task so that if a new image has been
+received on the serial port, the offset of the text is reset so that
+next time the screensaver displays something it will start from the
+beginning of the text.</p>
+<p>Note: you might have to adapt your <code>DrawingText</code> trait implementation for
+<code>Image</code>, for example if the text appears upside down.</p>
+<p>Make it even prettier if you wish, commit, push.</p>
+<p><strong>🦀 Congratulations, you have reached the end of this lab! 🦀</strong></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            MathJax.Hub.Register.StartupHook('End', function() {
+                window.setTimeout(window.print, 100);
+            });
+        });
+        </script>
+
+    </div>
+    </body>
+</html>
